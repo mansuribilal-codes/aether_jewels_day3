@@ -49,7 +49,6 @@
       <!-- Currency Switcher Trigger -->
       <button class="nav-icon-btn currency-trigger-btn" title="Change Valuation Currency"
         aria-label="Currency Selector">
-        <i class="ri-money-dollar-circle-line nav-icon-prefix"></i>
         <span class="current-currency-symbol">INR</span>
       </button>
 
@@ -86,12 +85,12 @@
         </a>
       </div>
       {% endif %}
-
+      {% if user.is_authenticated %}
       <!-- VIP Consultation Gold CTA -->
       <a href="{% url 'atelier:consultation' %}" class="btn btn-gold btn-sm nav-viewing-cta d-none-1100">
-        <i class="ri-calendar-line"></i> <span>Private Viewing</span>
+        <i class="ri-calendar-line"></i> <span>Private</span>
       </a>
-
+      {% endif %}
       <!-- Animated Luxury Mobile Hamburger Toggle -->
       <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Open Navigation Drawer" aria-expanded="false" aria-controls="mobile-drawer">
         <span class="hamburger-line"></span>
