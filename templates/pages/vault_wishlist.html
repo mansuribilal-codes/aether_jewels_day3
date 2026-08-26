@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Private Vault – Aether Jewels | Celestial Atelier{% endblock %}
+
+{% block content %}
+<div style="padding-top: calc(var(--header-height) + 3rem); padding-bottom: 7rem;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Private Client Sanctum</span>
+      <h1 class="section-title">Your Private Celestial Vault</h1>
+      <p class="section-subtitle">
+        Curated high jewellery masterpieces archived for private salon viewing and bespoke customization.
+      </p>
+    </div>
+
+    <!-- Empty State -->
+    <div id="vault-empty-state" class="glass-card" style="padding: 5rem 2rem; text-align: center; max-width: 680px; margin: 0 auto;">
+      <div style="width: 72px; height: 72px; border-radius: 50%; background: rgba(212, 175, 55, 0.12); border: 1px solid var(--gold-border); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem auto; color: var(--gold-light); font-size: 2rem;">
+        <i class="ri-safe-2-line"></i>
+      </div>
+      <h3 style="font-size: 1.6rem; margin-bottom: 0.75rem; color: #FFF6D6;">Your Vault is Empty</h3>
+      <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 2rem;">
+        Save your favorite high jewellery suites and solitaire masterpieces to this private vault by clicking the heart icon across our collections.
+      </p>
+      <a href="{% url 'atelier:product_list' %}" class="btn btn-gold">
+        <i class="ri-compass-3-line"></i> Explore Sovereign Masterpieces
+      </a>
+    </div>
+
+    <!-- Vault Items Grid (Rendered by vault.js) -->
+    <div id="vault-items-container" class="product-grid" style="margin-bottom: 4rem;">
+      <!-- Dynamically populated from localStorage via CelestialVault -->
+    </div>
+
+    <!-- Action Bar for Vault Items -->
+    <div id="vault-action-bar" class="glass-card" style="padding: 2rem; text-align: center; max-width: 800px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+      <div style="text-align: left;">
+        <div style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--gold-champagne);">Concierge Dispatch</div>
+        <div style="font-size: 1.1rem; color: var(--ivory-soft);">Ready to view these jewels in person?</div>
+      </div>
+      <a href="{% url 'atelier:consultation' %}" class="btn btn-gold">
+        <i class="ri-calendar-check-line"></i> Schedule Flagship Viewing Tray
+      </a>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

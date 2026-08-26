@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block title %}Patron Membership Registration – Aether Jewels | Celestial Atelier{% endblock %}
+
+{% block content %}
+<div style="padding-top: calc(var(--header-height) + 3.5rem); padding-bottom: 7rem; min-height: 85vh; display: flex; align-items: center;">
+  <div class="container" style="max-width: 580px;">
+    
+    <div class="glass-card" style="padding: 3rem 2.5rem; text-align: center; border: 1px solid var(--gold-border); box-shadow: 0 25px 80px rgba(0, 0, 0, 0.9);">
+      
+      <!-- Starlight Emblem -->
+      <div style="margin-bottom: 1.5rem;">
+        <svg style="width: 36px; height: 36px;" viewBox="0 0 100 100" fill="none">
+          <path d="M50 0L56 38L94 44L62 60L74 96L50 72L26 96L38 60L6 44L44 38L50 0Z" fill="url(#goldGradReg)" />
+          <circle cx="50" cy="50" r="8" fill="#FFF6D6" />
+          <defs>
+            <linearGradient id="goldGradReg" x1="6" y1="0" x2="94" y2="96" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#FFF6D6" />
+              <stop offset="0.45" stop-color="#D4AF37" />
+              <stop offset="1" stop-color="#997929" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <span class="section-tag">VIP Patron Invitation</span>
+      <h1 style="font-size: 1.85rem; margin-bottom: 0.5rem; color: #FFF6D6;">Establish Membership</h1>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 2rem;">
+        Join our inner circle of high jewellery connoisseurs to unlock the 3D Bespoke Atelier and confidential private salon previews.
+      </p>
+
+      {% if messages %}
+        {% for message in messages %}
+          <div style="padding: 0.85rem 1.25rem; background: rgba(212, 175, 55, 0.12); border: 1px solid var(--gold-primary); color: #FFF6D6; border-radius: var(--radius-sm); font-size: 0.82rem; margin-bottom: 1.5rem; text-align: left; display: flex; align-items: center; gap: 0.75rem;">
+            <i class="ri-information-fill text-gold" style="font-size: 1.1rem;"></i>
+            <span>{{ message }}</span>
+          </div>
+        {% endfor %}
+      {% endif %}
+
+      <form method="POST" action="{% url 'atelier:register' %}{% if next %}?next={{ next }}{% endif %}" style="text-align: left;">
+        {% csrf_token %}
+        {% if next %}
+          <input type="hidden" name="next" value="{{ next }}">
+        {% endif %}
+
+        <div class="form-row-2">
+          <div class="form-group">
+            <label for="id_fullname" class="form-label">Full Name & Salutation *</label>
+            <input type="text" id="id_fullname" name="full_name" class="form-control" required placeholder="e.g. Maharaja Vikram / Lady Eleanor">
+          </div>
+          <div class="form-group">
+            <label for="id_username_reg" class="form-label">Patron Username *</label>
+            <input type="text" id="id_username_reg" name="username" class="form-control" required placeholder="Desired username">
+          </div>
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-group">
+            <label for="id_email" class="form-label">Confidential Email *</label>
+            <input type="email" id="id_email" name="email" class="form-control" required placeholder="patron@domain.com">
+          </div>
+          <div class="form-group">
+            <label for="id_phone" class="form-label">Contact Telephone (+91)</label>
+            <input type="tel" id="id_phone" name="phone" class="form-control" placeholder="+91 98200 XXXXX">
+          </div>
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-group">
+            <label for="id_password_reg" class="form-label">Create Password (min. 6 chars) *</label>
+            <input type="password" id="id_password_reg" name="password" class="form-control" required placeholder="••••••••">
+          </div>
+          <div class="form-group">
+            <label for="id_confirm_password" class="form-label">Confirm Password *</label>
+            <input type="password" id="id_confirm_password" name="confirm_password" class="form-control" required placeholder="••••••••">
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-gold btn-lg" style="width: 100%; margin-top: 1rem;">
+          <i class="ri-sparkling-fill"></i> Establish VIP Membership & Continue
+        </button>
+      </form>
+
+      <div class="celestial-divider" style="margin: 2rem auto;">
+        <div class="line"></div>
+        <i class="ri-sparkling-fill star"></i>
+        <div class="line"></div>
+      </div>
+
+      <div style="font-size: 0.82rem; color: var(--text-muted);">
+        Already have a patron membership?
+        <a href="{% url 'atelier:login' %}{% if next %}?next={{ next }}{% endif %}" style="color: var(--gold-light); font-weight: 500; margin-left: 0.35rem;">
+          Sign In &rarr;
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+{% endblock %}

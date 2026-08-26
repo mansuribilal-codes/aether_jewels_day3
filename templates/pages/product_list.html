@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% block title %}High Jewellery Masterpieces – Aether Jewels | Celestial Atelier{% endblock %}
+
+{% block content %}
+<div style="padding-top: calc(var(--header-height) + 3rem); padding-bottom: 7rem;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Sovereign Haute Joaillerie</span>
+      <h1 class="section-title">The Celestial Registry</h1>
+      <p class="section-subtitle">
+        Explore our sovereign inventory of certified high jewellery, solitary engagement masterpieces, and one-of-a-kind relics.
+      </p>
+    </div>
+
+    <!-- Filter & Sort Bar -->
+    <div class="glass-card" style="padding: 1.5rem 2rem; margin-bottom: 3.5rem;">
+      <form method="GET" action="{% url 'atelier:product_list' %}" id="filter-form" style="display: flex; flex-wrap: wrap; gap: 1.25rem; align-items: center; justify-content: space-between;">
+        
+        <!-- Category Filter -->
+        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;">
+          <a href="{% url 'atelier:product_list' %}" class="btn btn-sm {% if not active_category %}btn-gold{% else %}btn-outline-gold{% endif %}" style="padding: 0.5rem 1rem;">
+            All ({{ total_count }})
+          </a>
+          {% for cat in categories %}
+          <a href="?category={{ cat.slug }}{% if active_price %}&price={{ active_price }}{% endif %}{% if active_sort %}&sort={{ active_sort }}{% endif %}" 
+             class="btn btn-sm {% if active_category == cat.slug %}btn-gold{% else %}btn-outline-gold{% endif %}" 
+             style="padding: 0.5rem 1rem;">
+            {{ cat.name }}
+          </a>
+          {% endfor %}
+        </div>
+
+        <!-- Additional Filter Dropdowns & Sort -->
+        <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+          <!-- Price Range Filter -->
+          <select name="price" class="form-control" style="width: auto; padding: 0.5rem 1rem; font-size: 0.78rem;" onchange="this.form.submit()">
+            <option value="">All Valuations</option>
+            <option value="under_1cr" {% if active_price == 'under_1cr' %}selected{% endif %}>Under ₹ 1 Crore</option>
+            <option value="1cr_3cr" {% if active_price == '1cr_3cr' %}selected{% endif %}>₹ 1 Cr – ₹ 3 Crores</option>
+            <option value="above_3cr" {% if active_price == 'above_3cr' %}selected{% endif %}>Above ₹ 3 Crores</option>
+          </select>
+
+          <!-- Sort Order -->
+          <select name="sort" class="form-control" style="width: auto; padding: 0.5rem 1rem; font-size: 0.78rem;" onchange="this.form.submit()">
+            <option value="featured" {% if active_sort == 'featured' %}selected{% endif %}>Curated Masterpieces</option>
+            <option value="price_high" {% if active_sort == 'price_high' %}selected{% endif %}>Valuation: High to Low</option>
+            <option value="price_low" {% if active_sort == 'price_low' %}selected{% endif %}>Valuation: Low to High</option>
+            <option value="carat_high" {% if active_sort == 'carat_high' %}selected{% endif %}>Highest Carat Weight</option>
+            <option value="newest" {% if active_sort == 'newest' %}selected{% endif %}>Newest Atelier Additions</option>
+          </select>
+
+          {% if active_category %}<input type="hidden" name="category" value="{{ active_category }}">{% endif %}
+        </div>
+      </form>
+    </div>
+
+    <!-- Product Grid -->
+    {% if products %}
+      <div class="product-grid">
+        {% for product in products %}
+        <div class="product-card glass-card">
+          <div class="product-img-wrapper">
+            <img src="{{ product.image_primary }}" alt="{{ product.title }}" class="product-img-primary" loading="lazy">
+            {% if product.image_secondary %}
+              <img src="{{ product.image_secondary }}" alt="{{ product.title }} alternate" class="product-img-secondary" loading="lazy">
+            {% endif %}
+
+            <div class="card-floating-badge">
+              <span class="badge-gold">{{ product.carat_weight }} ct</span>
+            </div>
+
+            <button class="card-vault-btn" 
+                    data-product-id="{{ product.id }}" 
+                    data-product-title="{{ product.title }}" 
+                    data-product-price="{{ product.price_inr }}" 
+                    data-product-image="{{ product.image_primary }}" 
+                    data-product-url="{% url 'atelier:product_detail' product.slug %}"
+                    data-product-specs="{{ product.carat_weight }}ct {{ product.primary_gemstone }}"
+                    title="Save to Private Vault">
+              <i class="ri-heart-3-line"></i>
+            </button>
+
+            <button class="btn btn-gold btn-sm card-quickview-btn" data-product-id="{{ product.id }}">
+              <i class="ri-eye-line"></i> Quick Specs
+            </button>
+          </div>
+
+          <div class="product-card-body">
+            <div>
+              <div class="product-category-meta">{{ product.category.name }}</div>
+              <h3 class="product-card-title">
+                <a href="{% url 'atelier:product_detail' product.slug %}">{{ product.title }}</a>
+              </h3>
+              <p class="product-card-specs">
+                {{ product.primary_gemstone|truncatechars:36 }} • {{ product.get_metal_type_display }}
+              </p>
+            </div>
+
+            <div class="product-card-footer">
+              <span class="product-price-val" data-price-inr="{{ product.price_inr }}">{{ product.formatted_price_inr }}</span>
+              <a href="{% url 'atelier:product_detail' product.slug %}" class="btn btn-outline-gold btn-sm">Inspect</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="glass-card" style="padding: 4rem; text-align: center;">
+        <i class="ri-sparkling-2-line" style="font-size: 3rem; color: var(--gold-primary);"></i>
+        <h3 style="font-size: 1.6rem; margin: 1rem 0 0.5rem 0;">No Sovereign Jewels Match Filter</h3>
+        <p style="color: var(--text-muted); margin-bottom: 2rem;">Adjust your filter criteria or speak directly with our Senior Client Director.</p>
+        <a href="{% url 'atelier:product_list' %}" class="btn btn-gold">Reset All Filters</a>
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

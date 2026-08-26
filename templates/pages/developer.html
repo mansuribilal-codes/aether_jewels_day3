@@ -1,0 +1,764 @@
+{% extends 'base.html' %}
+
+{% block title %}Mohammed Bilal Mansuri – Full Stack Web Developer (Python / Django) | Aether Jewels{% endblock %}
+{% block meta_description %}Portfolio and profile of Mohammed Bilal Mansuri, Full Stack Web Developer specializing in Python, Django, scalable backend systems, and luxury interactive UI engineering.{% endblock %}
+
+{% block extra_head %}
+<style>
+  /* ==========================================================================
+     DEVELOPER SHOWCASE PAGE STYLING
+     ========================================================================== */
+  .dev-hero-card {
+    background: linear-gradient(135deg, rgba(24, 26, 36, 0.85) 0%, rgba(14, 15, 22, 0.95) 100%);
+    border: 1px solid var(--gold-border);
+    border-radius: var(--radius-md);
+    padding: 3.5rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(212, 175, 55, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    margin-bottom: 4rem;
+  }
+
+  .dev-hero-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .dev-grid-layout {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 3.5rem;
+    align-items: center;
+  }
+
+  .dev-avatar-wrapper {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    margin: 0 auto;
+  }
+
+  .dev-avatar-frame {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    border: 2px solid var(--gold-primary);
+    box-shadow: 0 0 35px rgba(212, 175, 55, 0.35), inset 0 0 20px rgba(0, 0, 0, 0.8);
+    background: #0D0E15;
+  }
+
+  .dev-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    transition: transform var(--transition-slow);
+  }
+
+  .dev-avatar-wrapper:hover .dev-avatar-img {
+    transform: scale(1.05);
+  }
+
+  .dev-avatar-orbit {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border: 1px dashed rgba(212, 175, 55, 0.4);
+    border-radius: 50%;
+    animation: orbitRotate 30s linear infinite;
+    pointer-events: none;
+  }
+
+  @keyframes orbitRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .dev-status-pill {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(11, 11, 15, 0.92);
+    border: 1px solid var(--gold-border-active);
+    padding: 0.35rem 0.9rem;
+    border-radius: var(--radius-full);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.7rem;
+    color: #FFF6D6;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  }
+
+  .dev-status-dot {
+    width: 8px;
+    height: 8px;
+    background: #10B981;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #10B981;
+    animation: pulseGlow 2s infinite ease-in-out;
+  }
+
+  @keyframes pulseGlow {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.85); }
+  }
+
+  .dev-name-title {
+    font-family: var(--font-serif-royal);
+    font-size: clamp(2rem, 3.8vw, 3.1rem);
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.06em;
+  }
+
+  .dev-role-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(212, 175, 55, 0.12);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    color: var(--gold-champagne);
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.45rem 1.15rem;
+    border-radius: var(--radius-sm);
+    margin-bottom: 1.5rem;
+  }
+
+  .dev-bio-text {
+    font-size: 0.98rem;
+    line-height: 1.8;
+    color: var(--ivory-muted);
+    margin-bottom: 2rem;
+    max-width: 720px;
+  }
+
+  /* Contact & Links Grid */
+  .contact-matrix-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+
+  .contact-card {
+    background: var(--bg-glass-card);
+    border: 1px solid var(--gold-border);
+    border-radius: var(--radius-sm);
+    padding: 1.75rem;
+    transition: all var(--transition-luxury);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+  }
+
+  .contact-card:hover {
+    border-color: var(--gold-border-active);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5), 0 0 25px rgba(212, 175, 55, 0.15);
+  }
+
+  .contact-icon-box {
+    width: 46px;
+    height: 46px;
+    border-radius: var(--radius-sm);
+    background: rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold-primary);
+    font-size: 1.35rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .contact-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--gold-champagne);
+    margin-bottom: 0.35rem;
+  }
+
+  .contact-val {
+    font-size: 0.95rem;
+    color: #FFF6D6;
+    font-weight: 500;
+    word-break: break-all;
+    margin-bottom: 1.25rem;
+    display: block;
+  }
+
+  .contact-actions {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    border-top: 1px solid rgba(212, 175, 55, 0.15);
+    padding-top: 1rem;
+    margin-top: auto;
+  }
+
+  .contact-btn {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.55rem 0.85rem;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    background: rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    color: var(--gold-light);
+    text-decoration: none;
+  }
+
+  .contact-btn:hover {
+    background: var(--gold-foil);
+    color: #0B0B0F;
+    border-color: var(--gold-primary);
+  }
+
+  .copy-icon-btn {
+    padding: 0.55rem 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    color: var(--ivory-muted);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all var(--transition-fast);
+  }
+
+  .copy-icon-btn:hover {
+    color: var(--gold-light);
+    border-color: var(--gold-primary);
+    background: rgba(212, 175, 55, 0.15);
+  }
+
+  /* Skills & Pillars */
+  .skills-matrix {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4.5rem;
+  }
+
+  .skill-block {
+    background: var(--bg-glass-card);
+    border: 1px solid var(--gold-border);
+    border-radius: var(--radius-sm);
+    padding: 2.25rem;
+    transition: all var(--transition-luxury);
+  }
+
+  .skill-block:hover {
+    border-color: var(--gold-border-active);
+    transform: translateY(-3px);
+  }
+
+  .skill-block-header {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+  }
+
+  .skill-tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .skill-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: rgba(18, 19, 26, 0.85);
+    border: 1px solid rgba(212, 175, 55, 0.22);
+    padding: 0.4rem 0.85rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.78rem;
+    color: var(--ivory-soft);
+    letter-spacing: 0.04em;
+    transition: all var(--transition-fast);
+  }
+
+  .skill-pill:hover {
+    border-color: var(--gold-primary);
+    color: var(--gold-light);
+    background: rgba(212, 175, 55, 0.08);
+  }
+
+  .skill-pill i {
+    color: var(--gold-primary);
+    font-size: 0.85rem;
+  }
+
+  /* Project Architecture Highlights */
+  .arch-highlight-card {
+    background: linear-gradient(145deg, rgba(20, 22, 32, 0.8), rgba(12, 13, 18, 0.95));
+    border: 1px solid var(--gold-border);
+    border-radius: var(--radius-sm);
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .arch-feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 1.25rem 0 0 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+
+  .arch-feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 0.88rem;
+    color: var(--ivory-muted);
+    line-height: 1.5;
+  }
+
+  .arch-feature-item i {
+    color: var(--gold-primary);
+    font-size: 1.1rem;
+    margin-top: 2px;
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 991px) {
+    .dev-grid-layout {
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 2.5rem;
+    }
+
+    .dev-bio-text {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .dev-cta-row {
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .dev-hero-card {
+      padding: 2rem 1.5rem;
+    }
+
+    .dev-avatar-wrapper {
+      width: 220px;
+      height: 220px;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div style="padding-top: calc(var(--header-height) + 2.5rem); padding-bottom: 7rem;">
+  <div class="container">
+
+    <!-- Section Header Tagline -->
+    <div class="section-header" style="margin-bottom: 3.5rem;">
+      <span class="section-tag">Sovereign Architect & Digital Craftsman</span>
+      <h1 class="section-title">About The Developer</h1>
+      <p class="section-subtitle">
+        Architecting high-performance Python/Django backends and immersive luxury web applications.
+      </p>
+    </div>
+
+    <!-- 1. Hero Profile Card -->
+    <div class="dev-hero-card">
+      <div class="dev-grid-layout">
+        
+        <!-- Left: Profile Avatar with Celestial Rings -->
+        <div>
+          <div class="dev-avatar-wrapper">
+            <div class="dev-avatar-orbit"></div>
+            <div class="dev-avatar-frame">
+              <img src="{{ developer.profile_image }}" alt="{{ developer.name }}" class="dev-avatar-img" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=85'">
+            </div>
+            <div class="dev-status-pill">
+              <span class="dev-status-dot"></span>
+              <span>Available for Hire</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Bio & Profile Details -->
+        <div>
+          <span class="section-tag" style="margin-bottom: 0.5rem; font-size: 0.68rem;">Lead Engineer</span>
+          <h2 class="dev-name-title text-gold-gradient">{{ developer.name }}</h2>
+          <div class="dev-role-badge">
+            <i class="ri-code-box-line"></i>
+            <span>{{ developer.title }}</span>
+          </div>
+
+          <p class="dev-bio-text">
+            Mohammed Bilal Mansuri is an impassioned Full Stack Web Developer specializing in enterprise-grade Python and Django engineering. Blending rigorous database architecture with refined, high-touch luxury user experiences, Bilal engineers robust, scalable systems that translate visionary digital concepts into resilient realities.
+          </p>
+
+          <!-- Quick Action Buttons -->
+          <div class="dev-cta-row" style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+            <a href="mailto:{{ developer.email }}" class="btn btn-gold">
+              <i class="ri-mail-send-line"></i> <span>Get In Touch</span>
+            </a>
+            <a href="tel:{{ developer.phone }}" class="btn btn-outline-gold">
+              <i class="ri-phone-fill"></i> <span>Call Direct</span>
+            </a>
+            <a href="{{ developer.linkedin_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-gold" title="LinkedIn Profile">
+              <i class="ri-linkedin-box-fill"></i> <span>LinkedIn</span>
+            </a>
+            <a href="{{ developer.github_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-gold" title="GitHub Profile">
+              <i class="ri-github-fill"></i> <span>GitHub</span>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Direct Contact & Connection Matrix -->
+    <div style="margin-bottom: 2rem;">
+      <span class="section-tag">Direct Dossier & Communication</span>
+      <h3 style="font-size: 1.8rem; margin-bottom: 1.5rem; color: #FFF6D6;">Verified Channels & Credentials</h3>
+    </div>
+
+    <div class="contact-matrix-grid">
+      
+      <!-- Phone Card -->
+      <div class="contact-card">
+        <div>
+          <div class="contact-icon-box">
+            <i class="ri-phone-line"></i>
+          </div>
+          <div class="contact-label">Direct Voice & WhatsApp</div>
+          <span class="contact-val">{{ developer.phone_display }}</span>
+        </div>
+        <div class="contact-actions">
+          <a href="tel:{{ developer.phone }}" class="contact-btn">
+            <i class="ri-phone-fill"></i> Call
+          </a>
+          <a href="https://wa.me/919723918213" target="_blank" rel="noopener noreferrer" class="contact-btn">
+            <i class="ri-whatsapp-line"></i> Chat
+          </a>
+          <button type="button" class="copy-icon-btn" onclick="copyToClipboard('{{ developer.phone }}', 'Phone Number')" title="Copy Phone Number">
+            <i class="ri-file-copy-line"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Email Card -->
+      <div class="contact-card">
+        <div>
+          <div class="contact-icon-box">
+            <i class="ri-mail-line"></i>
+          </div>
+          <div class="contact-label">Primary VIP Email</div>
+          <span class="contact-val">{{ developer.email }}</span>
+        </div>
+        <div class="contact-actions">
+          <a href="mailto:{{ developer.email }}" class="contact-btn">
+            <i class="ri-send-plane-line"></i> Send Email
+          </a>
+          <button type="button" class="copy-icon-btn" onclick="copyToClipboard('{{ developer.email }}', 'Email Address')" title="Copy Email">
+            <i class="ri-file-copy-line"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- LinkedIn Card -->
+      <div class="contact-card">
+        <div>
+          <div class="contact-icon-box">
+            <i class="ri-linkedin-fill"></i>
+          </div>
+          <div class="contact-label">Professional Network</div>
+          <span class="contact-val">{{ developer.linkedin }}</span>
+        </div>
+        <div class="contact-actions">
+          <a href="{{ developer.linkedin_url }}" target="_blank" rel="noopener noreferrer" class="contact-btn">
+            <i class="ri-external-link-line"></i> Visit LinkedIn
+          </a>
+          <button type="button" class="copy-icon-btn" onclick="copyToClipboard('{{ developer.linkedin_url }}', 'LinkedIn URL')" title="Copy LinkedIn Link">
+            <i class="ri-file-copy-line"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- GitHub Card -->
+      <div class="contact-card">
+        <div>
+          <div class="contact-icon-box">
+            <i class="ri-github-line"></i>
+          </div>
+          <div class="contact-label">Source Code & Portfolio</div>
+          <span class="contact-val">{{ developer.github }}</span>
+        </div>
+        <div class="contact-actions">
+          <a href="{{ developer.github_url }}" target="_blank" rel="noopener noreferrer" class="contact-btn">
+            <i class="ri-code-s-slash-line"></i> View Repos
+          </a>
+          <button type="button" class="copy-icon-btn" onclick="copyToClipboard('{{ developer.github_url }}', 'GitHub URL')" title="Copy GitHub Link">
+            <i class="ri-file-copy-line"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 3. Technical Mastery & Core Arsenal -->
+    <div style="margin-bottom: 2rem;">
+      <span class="section-tag">Engineering Arsenal</span>
+      <h3 style="font-size: 1.8rem; margin-bottom: 1.5rem; color: #FFF6D6;">Full Stack Expertise</h3>
+    </div>
+
+    <div class="skills-matrix">
+      
+      <!-- Backend Pillar -->
+      <div class="skill-block">
+        <div class="skill-block-header">
+          <i class="ri-server-line text-gold" style="font-size: 1.75rem;"></i>
+          <div>
+            <h4 style="font-size: 1.15rem; color: #FFF6D6; margin-bottom: 2px;">Backend & System Architecture</h4>
+            <span style="font-size: 0.72rem; color: var(--gold-champagne); letter-spacing: 0.1em; text-transform: uppercase;">Core Foundation</span>
+          </div>
+        </div>
+        <div class="skill-tag-cloud">
+          <span class="skill-pill"><i class="ri-checkbox-circle-line"></i> Python 3</span>
+          <span class="skill-pill"><i class="ri-checkbox-circle-line"></i> Django Framework (MVT)</span>
+          <span class="skill-pill"><i class="ri-checkbox-circle-line"></i> Django REST Framework (DRF)</span>
+          <span class="skill-pill"><i class="ri-checkbox-circle-line"></i> Django ORM & Migrations</span>
+          <span class="skill-pill"><i class="ri-checkbox-circle-line"></i> PostgreSQL & SQLite</span>
+          <span class="skill-pill"><i class="ri-checkbox-circle-line"></i> User Auth & Session Security</span>
+          <span class="skill-pill"><i class="ri-checkbox-circle-line"></i> Custom Query Optimization</span>
+          <span class="skill-pill"><i class="ri-checkbox-circle-line"></i> Middleware & Signals</span>
+          <span class="skill-pill"><i class="ri-checkbox-circle-line"></i> CSRF & Input Sanitization</span>
+        </div>
+      </div>
+
+      <!-- Frontend Pillar -->
+      <div class="skill-block">
+        <div class="skill-block-header">
+          <i class="ri-layout-masonry-line text-gold" style="font-size: 1.75rem;"></i>
+          <div>
+            <h4 style="font-size: 1.15rem; color: #FFF6D6; margin-bottom: 2px;">Frontend & Luxury UI</h4>
+            <span style="font-size: 0.72rem; color: var(--gold-champagne); letter-spacing: 0.1em; text-transform: uppercase;">Experience Design</span>
+          </div>
+        </div>
+        <div class="skill-tag-cloud">
+          <span class="skill-pill"><i class="ri-checkbox-circle-line"></i> HTML5 Semantic Web</span>
+          <span class="skill-pill"><i class="ri-checkbox-circle-line"></i> Vanilla CSS3 Custom Systems</span>
+          <span class="skill-pill"><i class="ri-checkbox-circle-line"></i> Glassmorphism & Micro-animations</span>
+          <span class="skill-pill"><i class="ri-checkbox-circle-line"></i> JavaScript (ES6+ Vanilla)</span>
+          <span class="skill-pill"><i class="ri-checkbox-circle-line"></i> GSAP 3 & ScrollTrigger</span>
+          <span class="skill-pill"><i class="ri-checkbox-circle-line"></i> HTML5 Canvas Dynamic Rendering</span>
+          <span class="skill-pill"><i class="ri-checkbox-circle-line"></i> Mobile-First Responsive Design</span>
+          <span class="skill-pill"><i class="ri-checkbox-circle-line"></i> AJAX / Fetch API Integration</span>
+          <span class="skill-pill"><i class="ri-checkbox-circle-line"></i> Audio Web APIs & Soundscapes</span>
+        </div>
+      </div>
+
+      <!-- Engineering Practices -->
+      <div class="skill-block">
+        <div class="skill-block-header">
+          <i class="ri-tools-line text-gold" style="font-size: 1.75rem;"></i>
+          <div>
+            <h4 style="font-size: 1.15rem; color: #FFF6D6; margin-bottom: 2px;">Tooling & Methodologies</h4>
+            <span style="font-size: 0.72rem; color: var(--gold-champagne); letter-spacing: 0.1em; text-transform: uppercase;">Standards & Reliability</span>
+          </div>
+        </div>
+        <div class="skill-tag-cloud">
+          <span class="skill-pill"><i class="ri-checkbox-circle-line"></i> Git & GitHub Version Control</span>
+          <span class="skill-pill"><i class="ri-checkbox-circle-line"></i> RESTful API Standards</span>
+          <span class="skill-pill"><i class="ri-checkbox-circle-line"></i> Clean Code & DRY Architecture</span>
+          <span class="skill-pill"><i class="ri-checkbox-circle-line"></i> Performance & Asset Tuning</span>
+          <span class="skill-pill"><i class="ri-checkbox-circle-line"></i> Search Engine Optimization (SEO)</span>
+          <span class="skill-pill"><i class="ri-checkbox-circle-line"></i> Cross-Browser Compatibility</span>
+          <span class="skill-pill"><i class="ri-checkbox-circle-line"></i> Rapid Full-Stack Delivery</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 4. Project Engineering Spotlight: Aether Jewels -->
+    <div class="arch-highlight-card">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
+        <div>
+          <span class="section-tag" style="margin-bottom: 0.5rem;">Featured Flagship Implementation</span>
+          <h3 style="font-size: 1.6rem; color: #FFF6D6;">Aether Jewels – Celestial High Jewellery Platform</h3>
+        </div>
+        <span class="badge-gold"><i class="ri-sparkling-line"></i> Full Stack Showcase</span>
+      </div>
+
+      <p style="color: var(--ivory-muted); line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;">
+        Designed and engineered entirely from the ground up, this flagship high jewellery web application demonstrates mastery over full-stack Python/Django architecture combined with cutting-edge front-end design techniques:
+      </p>
+
+      <ul class="arch-feature-list">
+        <li class="arch-feature-item">
+          <i class="ri-shape-line"></i>
+          <div>
+            <strong style="color: #FFF6D6;">Interactive Bespoke Atelier:</strong>
+            Real-time HTML5 2D canvas jewel configurator with dynamic gemstone facets, metal selection, and live valuation computations.
+          </div>
+        </li>
+        <li class="arch-feature-item">
+          <i class="ri-star-line"></i>
+          <div>
+            <strong style="color: #FFF6D6;">Dynamic Celestial Canvas:</strong>
+            Interactive starfield engine with mouse-proximity constellation connections and smooth GPU-accelerated rendering loops.
+          </div>
+        </li>
+        <li class="arch-feature-item">
+          <i class="ri-shield-user-line"></i>
+          <div>
+            <strong style="color: #FFF6D6;">VIP Patron Authentication:</strong>
+            Protected bespoke configurator routes, user authentication flows, and session-secured client vault heirlooms.
+          </div>
+        </li>
+        <li class="arch-feature-item">
+          <i class="ri-exchange-dollar-line"></i>
+          <div>
+            <strong style="color: #FFF6D6;">Multi-Currency Valuation:</strong>
+            Live client-side currency converter supporting INR (₹ Crores/Lakhs), USD ($), EUR (€), GBP (£), and AED (د.إ).
+          </div>
+        </li>
+      </ul>
+
+      <div style="display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap;">
+        <a href="{% url 'atelier:bespoke' %}" class="btn btn-gold btn-sm">
+          <i class="ri-palette-line"></i> Test Bespoke Configurator
+        </a>
+        <a href="{% url 'atelier:product_list' %}" class="btn btn-outline-gold btn-sm">
+          <i class="ri-gemini-line"></i> Browse Jewels Directory
+        </a>
+      </div>
+    </div>
+
+    <!-- 5. Engineering Principles -->
+    <div class="glass-card" style="padding: 3rem; margin-bottom: 4rem; text-align: center;">
+      <h3 style="font-size: 1.5rem; margin-bottom: 2rem; color: #FFF6D6;">Core Engineering Principles</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; text-align: left;">
+        <div>
+          <i class="ri-shield-check-line" style="font-size: 2rem; color: var(--gold-primary); margin-bottom: 0.5rem; display: block;"></i>
+          <h4 style="font-size: 1.05rem; margin-bottom: 0.4rem; color: #FFF6D6;">Security & Integrity</h4>
+          <p style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.6;">CSRF defense, parameter sanitization, secure hashing, and robust authentication guards on every sensitive endpoint.</p>
+        </div>
+        <div>
+          <i class="ri-speed-up-line" style="font-size: 2rem; color: var(--gold-primary); margin-bottom: 0.5rem; display: block;"></i>
+          <h4 style="font-size: 1.05rem; margin-bottom: 0.4rem; color: #FFF6D6;">Speed & Performance</h4>
+          <p style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.6;">Optimized database queries, lightweight vanilla scripts, zero unnecessary dependencies, and fast load times.</p>
+        </div>
+        <div>
+          <i class="ri-pantone-line" style="font-size: 2rem; color: var(--gold-primary); margin-bottom: 0.5rem; display: block;"></i>
+          <h4 style="font-size: 1.05rem; margin-bottom: 0.4rem; color: #FFF6D6;">Aesthetic Excellence</h4>
+          <p style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.6;">Translating brand luxury into captivating visual design, harmonic color palettes, micro-interactions, and fluid responsiveness.</p>
+        </div>
+        <div>
+          <i class="ri-git-merge-line" style="font-size: 2rem; color: var(--gold-primary); margin-bottom: 0.5rem; display: block;"></i>
+          <h4 style="font-size: 1.05rem; margin-bottom: 0.4rem; color: #FFF6D6;">Maintainable Code</h4>
+          <p style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.6;">Clean architectural separation of concerns, DRY principles, descriptive naming, and modular component reusability.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. Bottom Call to Action -->
+    <div style="text-align: center; max-width: 700px; margin: 0 auto;">
+      <span class="section-tag">Let's Build Extraordinary Systems</span>
+      <h2 style="font-size: 2rem; margin-bottom: 1rem; color: #FFF6D6;">Initiate a Conversation</h2>
+      <p style="color: var(--ivory-muted); font-size: 0.92rem; margin-bottom: 2rem; line-height: 1.7;">
+        Whether you are seeking a skilled full-stack Python/Django engineer for high-impact roles, custom web applications, or luxury brand experiences, reach out directly.
+      </p>
+      <div style="display: flex; justify-content: center; gap: 1.25rem; flex-wrap: wrap;">
+        <a href="mailto:{{ developer.email }}" class="btn btn-gold">
+          <i class="ri-mail-send-fill"></i> <span>mansuribilal9792@gmail.com</span>
+        </a>
+        <a href="tel:{{ developer.phone }}" class="btn btn-outline-gold">
+          <i class="ri-phone-line"></i> <span>+91 97239 18213</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+  /**
+   * Helper function to copy text to clipboard and trigger luxury toast notification
+   */
+  function copyToClipboard(text, label) {
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(() => {
+        if (window.showToast) {
+          window.showToast(`${label} copied to clipboard: ${text}`, 'gold');
+        } else {
+          alert(`${label} copied: ${text}`);
+        }
+      }).catch(err => {
+        fallbackCopy(text, label);
+      });
+    } else {
+      fallbackCopy(text, label);
+    }
+  }
+
+  function fallbackCopy(text, label) {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    textArea.style.position = "fixed";
+    textArea.style.opacity = "0";
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+      document.execCommand('copy');
+      if (window.showToast) {
+        window.showToast(`${label} copied to clipboard: ${text}`, 'gold');
+      } else {
+        alert(`${label} copied: ${text}`);
+      }
+    } catch (err) {
+      if (window.showToast) {
+        window.showToast(`Unable to copy automatically. Content: ${text}`, 'info');
+      }
+    }
+    document.body.removeChild(textArea);
+  }
+</script>
+{% endblock %}

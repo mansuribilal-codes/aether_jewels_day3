@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+
+{% block title %}Book Private Consultation – Aether Jewels | Celestial Atelier{% endblock %}
+
+{% block content %}
+<div style="padding-top: calc(var(--header-height) + 2.5rem); padding-bottom: 7rem;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Confidential Salon Viewing</span>
+      <h1 class="section-title">Private Consultation Suite</h1>
+      <p class="section-subtitle">
+        Reserve an exclusive, private high jewellery session at one of our sovereign flagship lounges across India or via encrypted 4K virtual salon.
+      </p>
+    </div>
+
+    <!-- Flagship Lounges Grid -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-bottom: 5rem;">
+      {% for lounge in flagships %}
+      <div class="glass-card" style="overflow: hidden; display: flex; flex-direction: column;">
+        <div style="height: 180px; background: #0E0F16; overflow: hidden; position: relative;">
+          {% if lounge.image_url %}
+            <img src="{{ lounge.image_url }}" alt="{{ lounge.lounge_name }}" style="width: 100%; height: 100%; object-fit: cover;">
+          {% endif %}
+          <div style="position: absolute; top: 1rem; left: 1rem;">
+            <span class="badge-gold">{{ lounge.city }}</span>
+          </div>
+        </div>
+        <div style="padding: 1.75rem; display: flex; flex-direction: column; justify-content: space-between; flex-grow: 1;">
+          <div>
+            <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem; color: #FFF6D6;">{{ lounge.lounge_name }}</h3>
+            <p style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1rem;">{{ lounge.address }}</p>
+          </div>
+          <div style="border-top: 1px solid rgba(212, 175, 55, 0.15); padding-top: 0.75rem; font-size: 0.75rem; color: var(--gold-champagne);">
+            <div><i class="ri-phone-line"></i> {{ lounge.phone }}</div>
+            <div style="color: var(--text-dim); margin-top: 0.25rem;">{{ lounge.hours }}</div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Appointment Booking Form Card -->
+    <div class="consultation-grid" style="margin-bottom: 4rem;">
+      <div>
+        <span class="section-tag">VIP Protocol</span>
+        <h2 style="font-size: 2rem; margin-bottom: 1rem; color: #FFF6D6;">Your Private Appointment</h2>
+        <p style="color: var(--ivory-muted); line-height: 1.7; font-size: 0.92rem; margin-bottom: 1.5rem;">
+          To ensure absolute privacy and security, each viewing is restricted to one patron party at a time. Our Senior Client Director and Master Gemologist will curate a bespoke tray tailored to your collection preferences.
+        </p>
+
+        <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem;">
+          <div style="display: flex; gap: 1rem; align-items: flex-start;">
+            <i class="ri-shield-star-line" style="color: var(--gold-primary); font-size: 1.4rem;"></i>
+            <div>
+              <div style="font-size: 0.85rem; font-weight: 500; color: var(--ivory-soft);">Armored Discretion & Privacy</div>
+              <div style="font-size: 0.78rem; color: var(--text-muted);">Confidential private elevator entrance and armored viewing suites.</div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 1rem; align-items: flex-start;">
+            <i class="ri-microscope-line" style="color: var(--gold-primary); font-size: 1.4rem;"></i>
+            <div>
+              <div style="font-size: 0.85rem; font-weight: 500; color: var(--ivory-soft);">Gemological Spectrometry</div>
+              <div style="font-size: 0.78rem; color: var(--text-muted);">40x stereomicroscopes and UV fluorescence lamps on site.</div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 1rem; align-items: flex-start;">
+            <i class="ri-goblet-line" style="color: var(--gold-primary); font-size: 1.4rem;"></i>
+            <div>
+              <div style="font-size: 0.85rem; font-weight: 500; color: var(--ivory-soft);">Private Sommelier Service</div>
+              <div style="font-size: 0.78rem; color: var(--text-muted);">Dom Pérignon Vintage Champagne, rare single-estate Darjeeling teas.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Form -->
+      <div>
+        <form id="consultation-booking-form">
+          <div class="form-group">
+            <label class="form-label">Select Flagship Salon *</label>
+            <select id="city-lounge-input" name="city_lounge" class="form-control" required>
+              {% for lounge in flagships %}
+              <option value="{{ lounge.lounge_name }}, {{ lounge.city }}">{{ lounge.city }} – {{ lounge.lounge_name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="client-fullname" class="form-label">Full Name *</label>
+              <input type="text" id="client-fullname" name="full_name" required class="form-control" placeholder="e.g. Maharani Gayatri / Lord Sterling">
+            </div>
+            <div class="form-group">
+              <label for="client-booking-email" class="form-label">Confidential Email *</label>
+              <input type="email" id="client-booking-email" name="email" required class="form-control" placeholder="patron@sovereign.com">
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="client-booking-phone" class="form-label">Contact Phone (+91) *</label>
+              <input type="tel" id="client-booking-phone" name="phone" required class="form-control" placeholder="+91 98200 XXXXX">
+            </div>
+            <div class="form-group">
+              <label for="jewellery-interest" class="form-label">High Jewellery Focus</label>
+              <select id="jewellery-interest" name="jewellery_interest" class="form-control">
+                <option value="Celestial High Jewellery Suites">Celestial High Jewellery Suites</option>
+                <option value="Bespoke Solitaire Engagement Ring">Bespoke Solitaire Engagement Ring</option>
+                <option value="Historic Golconda & Kashmir Gemstones">Historic Golconda & Kashmir Gemstones</option>
+                <option value="Royal Wedding & Bridal Trunk">Royal Wedding & Bridal Trunk</option>
+                <option value="Private Vault Heirloom Commission">Private Vault Heirloom Commission</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="booking-date" class="form-label">Preferred Date *</label>
+              <input type="date" id="booking-date" name="preferred_date" required class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="booking-time" class="form-label">Preferred Time Slot</label>
+              <select id="booking-time" name="preferred_time" class="form-control">
+                <option value="11:30 AM – Morning Private Salon">11:30 AM – Morning Private Salon</option>
+                <option value="03:30 PM – Afternoon Tea & Gemology">03:30 PM – Afternoon Tea & Gemology</option>
+                <option value="06:30 PM – Twilight Champagne Viewing">06:30 PM – Twilight Champagne Viewing</option>
+                <option value="08:30 PM – Late Evening Discretion Salon">08:30 PM – Late Evening Discretion Salon</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="hospitality-preference" class="form-label">Private Hospitality Choice</label>
+            <select id="hospitality-preference" name="hospitality_preference" class="form-control">
+              <option value="Dom Pérignon Vintage Champagne & Oscietra Caviar">Dom Pérignon Vintage Champagne & Oscietra Caviar</option>
+              <option value="Single Origin Makaibari Silver Needle White Tea">Single Origin Makaibari Silver Needle White Tea</option>
+              <option value="Artisanal Kashmiri Saffron & Almond Kahwa">Artisanal Kashmiri Saffron & Almond Kahwa</option>
+              <option value="Blue Mountain Jamaican Pour-Over Coffee">Blue Mountain Jamaican Pour-Over Coffee</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="booking-notes" class="form-label">Special Inquiries or Security Protocol</label>
+            <textarea id="booking-notes" name="notes" rows="3" class="form-control" placeholder="State any specific high jewellery pieces from the catalog you wish to have on the private viewing tray..."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-gold btn-lg" style="width: 100%;">
+            <i class="ri-calendar-check-line"></i> Confirm Private Viewing Reservation
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

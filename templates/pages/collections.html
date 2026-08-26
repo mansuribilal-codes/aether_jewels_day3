@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Sovereign Collections – Aether Jewels | Celestial Atelier{% endblock %}
+
+{% block content %}
+<div style="padding-top: calc(var(--header-height) + 3rem); padding-bottom: 7rem;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">High Jewellery Series</span>
+      <h1 class="section-title">The Sovereign Collections</h1>
+      <p class="section-subtitle">
+        Limited-edition celestial chapters forged under astronomical alignments. Each suite represents years of gemstone curation.
+      </p>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 4.5rem; margin-top: 4rem;">
+      {% for collection in collections %}
+      <div class="glass-card" style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; overflow: hidden; align-items: center;">
+        <div style="height: 480px; position: relative; background: #0E0F16; overflow: hidden;">
+          <img src="{{ collection.cover_image }}" alt="{{ collection.name }}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease;">
+          <div style="position: absolute; top: 1.5rem; left: 1.5rem;">
+            <span class="badge-gold"><i class="ri-sparkling-fill"></i> Sovereign Capsule</span>
+          </div>
+        </div>
+
+        <div style="padding: 3rem 3.5rem 3rem 0;">
+          <span class="section-tag">Chapter 0{{ forloop.counter }}</span>
+          <h2 style="font-size: 2.4rem; margin-bottom: 1rem; color: #FFF6D6;">{{ collection.name }}</h2>
+          <p style="font-family: var(--font-serif-editorial); font-size: 1.25rem; font-style: italic; color: var(--gold-light); margin-bottom: 1.25rem; line-height: 1.5;">
+            {{ collection.subtitle }}
+          </p>
+          <p style="color: var(--ivory-muted); line-height: 1.7; font-size: 0.92rem; margin-bottom: 1.5rem;">
+            {{ collection.curator_note }}
+          </p>
+          <p style="color: var(--text-muted); line-height: 1.6; font-size: 0.85rem; margin-bottom: 2rem;">
+            {{ collection.description }}
+          </p>
+
+          <div style="display: flex; gap: 1rem;">
+            <a href="{% url 'atelier:collection_detail' collection.slug %}" class="btn btn-gold">
+              Explore Suite ({{ collection.products.count }} Jewels)
+            </a>
+            <a href="{% url 'atelier:consultation' %}" class="btn btn-outline-gold">
+              Private Salon Inquiry
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

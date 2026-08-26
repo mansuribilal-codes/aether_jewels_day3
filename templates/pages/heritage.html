@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block title %}The Heritage & Provenance – Aether Jewels | Celestial Atelier{% endblock %}
+
+{% block content %}
+<div style="padding-top: calc(var(--header-height) + 2.5rem); padding-bottom: 7rem;">
+  
+  <!-- Hero Section -->
+  <div class="container text-center" style="max-width: 900px; margin-bottom: 5rem;">
+    <span class="section-tag">Centennial Sovereign Legacy</span>
+    <h1 class="section-title">The Lore of Celestial Craftsmanship</h1>
+    <p class="section-subtitle">
+      Nearly a century of uniting India’s royal gemstone provenance with Parisian haute joaillerie architecture.
+    </p>
+  </div>
+
+  <!-- Narrative Timeline Grid -->
+  <div class="container" style="max-width: 1100px;">
+    <div style="display: flex; flex-direction: column; gap: 5rem; margin-bottom: 6rem;">
+      
+      <!-- Chapter 1 -->
+      <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; align-items: center;">
+        <div class="craft-img-frame">
+          <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1000&q=85" alt="1928 Legacy">
+        </div>
+        <div>
+          <span class="section-tag">1928 • The Genesis</span>
+          <h2 style="font-size: 2.2rem; margin-bottom: 1rem; color: #FFF6D6;">The Royal Vaults of Jaipur</h2>
+          <p style="color: var(--ivory-muted); line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.25rem;">
+            Founded in 1928 under royal patronage in Rajasthan, Aether Jewels originated as private master goldsmiths to sovereign maharajas. Tasked with crafting coronation crowns, turban kalgis, and ceremonial necklaces, our atelier perfected the synthesis of Syndicate Polki diamonds and antique basra pearls.
+          </p>
+          <p style="color: var(--text-muted); line-height: 1.7; font-size: 0.88rem;">
+            Each generation guarded the proprietary metallurgical secrets of sovereign champagne gold and 24-facet starlight cutting.
+          </p>
+        </div>
+      </div>
+
+      <!-- Chapter 2 -->
+      <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items: center;">
+        <div>
+          <span class="section-tag">1964 • The Paris Rendezvous</span>
+          <h2 style="font-size: 2.2rem; margin-bottom: 1rem; color: #FFF6D6;">Haute Joaillerie Fusion</h2>
+          <p style="color: var(--ivory-muted); line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.25rem;">
+            In the mid-20th century, the second generation of Aether jewelers established collaborative benches at Place Vendôme in Paris. This cross-cultural dialogue introduced high-tensile platinum wirework and French articulated hinges into the majestic weight of Indian royal jewellery.
+          </p>
+          <p style="color: var(--text-muted); line-height: 1.7; font-size: 0.88rem;">
+            The result was wearable high jewellery: monumental in gemstone scale, yet as light and fluid as liquid silk upon the collarbone.
+          </p>
+        </div>
+        <div class="craft-img-frame">
+          <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1000&q=85" alt="Paris Haute Joaillerie">
+        </div>
+      </div>
+
+      <!-- Chapter 3 -->
+      <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; align-items: center;">
+        <div class="craft-img-frame">
+          <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1000&q=85" alt="Ethical Sourcing">
+        </div>
+        <div>
+          <span class="section-tag">Present • The Celestial Vision</span>
+          <h2 style="font-size: 2.2rem; margin-bottom: 1rem; color: #FFF6D6;">Ethical Sourcing & Sovereign Hallmarking</h2>
+          <p style="color: var(--ivory-muted); line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.25rem;">
+            Today, Aether Jewels operates as an exclusive high jewellery atelier catering to discerning global connoisseurs. Every diamond is certified by GIA, strictly 100% compliant with the Kimberley Process, and set in 100% recycled 950 Sovereign Platinum or BIS 916 Hallmarked Gold.
+          </p>
+          <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+            <a href="{% url 'atelier:product_list' %}" class="btn btn-gold">Explore Masterpieces</a>
+            <a href="{% url 'atelier:consultation' %}" class="btn btn-outline-gold">Reserve Flagship Viewing</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Assurance Badges Grid -->
+    <div class="glass-card" style="padding: 3.5rem; text-align: center;">
+      <h3 style="font-size: 1.5rem; margin-bottom: 2rem; color: #FFF6D6;">The Sovereign Guarantees</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem;">
+        <div>
+          <i class="ri-shield-star-line" style="font-size: 2.5rem; color: var(--gold-primary); margin-bottom: 0.75rem; display: block;"></i>
+          <h4 style="font-size: 1.05rem; margin-bottom: 0.5rem;">Dual Certification</h4>
+          <p style="font-size: 0.8rem; color: var(--text-muted);">Every central stone is certified by GIA, Gubelin, or SSEF with full origin dossiers.</p>
+        </div>
+
+        <div>
+          <i class="ri-award-line" style="font-size: 2.5rem; color: var(--gold-primary); margin-bottom: 0.75rem; display: block;"></i>
+          <h4 style="font-size: 1.05rem; margin-bottom: 0.5rem;">BIS 916 Hallmark</h4>
+          <p style="font-size: 0.8rem; color: var(--text-muted);">Strictly laser-hallmarked by the Bureau of Indian Standards ensuring gold purity.</p>
+        </div>
+
+        <div>
+          <i class="ri-earth-line" style="font-size: 2.5rem; color: var(--gold-primary); margin-bottom: 0.75rem; display: block;"></i>
+          <h4 style="font-size: 1.05rem; margin-bottom: 0.5rem;">Ethical Provenance</h4>
+          <p style="font-size: 0.8rem; color: var(--text-muted);">Conflict-free diamonds with documented supply chain transparency.</p>
+        </div>
+
+        <div>
+          <i class="ri-safe-2-line" style="font-size: 2.5rem; color: var(--gold-primary); margin-bottom: 0.75rem; display: block;"></i>
+          <h4 style="font-size: 1.05rem; margin-bottom: 0.5rem;">Lifetime Vault Care</h4>
+          <p style="font-size: 0.8rem; color: var(--text-muted);">Complimentary annual ultrasonic cleaning, prong inspection, and valuation updates.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

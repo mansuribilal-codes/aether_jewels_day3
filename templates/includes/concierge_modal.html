@@ -1,0 +1,60 @@
+<!-- Currency Switcher Modal -->
+<div id="currency-modal" class="modal-backdrop">
+  <div class="modal-window" style="max-width: 520px; padding: 2.5rem; text-align: center;">
+    <button class="modal-close-btn">&times;</button>
+    <div style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.25em; color: var(--gold-primary); margin-bottom: 0.75rem;">
+      International Sovereign Valuation
+    </div>
+    <h3 style="font-size: 1.6rem; margin-bottom: 1rem;">Select Display Currency</h3>
+    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 2rem;">
+      All master valuations are benchmarked in Indian Rupees (INR) and converted in real-time according to international market indices.
+    </p>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+      <button class="config-option-card currency-option-btn" data-currency="INR">
+        <span style="font-size: 1.4rem; font-family: var(--font-serif-royal); color: var(--gold-light); display: block; margin-bottom: 0.25rem;">₹ INR</span>
+        <span class="option-name">Indian Rupee (Lakhs / Cr)</span>
+      </button>
+      <button class="config-option-card currency-option-btn" data-currency="USD">
+        <span style="font-size: 1.4rem; font-family: var(--font-serif-royal); color: var(--gold-light); display: block; margin-bottom: 0.25rem;">$ USD</span>
+        <span class="option-name">United States Dollar</span>
+      </button>
+      <button class="config-option-card currency-option-btn" data-currency="AED">
+        <span style="font-size: 1.4rem; font-family: var(--font-serif-royal); color: var(--gold-light); display: block; margin-bottom: 0.25rem;">AED</span>
+        <span class="option-name">UAE Dirham</span>
+      </button>
+      <button class="config-option-card currency-option-btn" data-currency="GBP">
+        <span style="font-size: 1.4rem; font-family: var(--font-serif-royal); color: var(--gold-light); display: block; margin-bottom: 0.25rem;">£ GBP</span>
+        <span class="option-name">British Pound Sterling</span>
+      </button>
+      <button class="config-option-card currency-option-btn" data-currency="EUR" style="grid-column: span 2;">
+        <span style="font-size: 1.4rem; font-family: var(--font-serif-royal); color: var(--gold-light); display: block; margin-bottom: 0.25rem;">€ EUR</span>
+        <span class="option-name">European Euro</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Consultation Confirmed Modal -->
+<div id="consultation-confirmed-modal" class="modal-backdrop">
+  <div class="modal-window" style="max-width: 580px; padding: 3rem 2.5rem; text-align: center;">
+    <button class="modal-close-btn">&times;</button>
+    <div style="width: 64px; height: 64px; border-radius: 50%; background: rgba(212, 175, 55, 0.15); border: 1px solid var(--gold-primary); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem auto; color: var(--gold-light); font-size: 2rem;">
+      <i class="ri-checkbox-circle-fill"></i>
+    </div>
+    <span class="badge-gold" style="margin-bottom: 0.75rem;">VIP RESERVATION SECURED</span>
+    <h2 style="font-size: 1.8rem; margin-bottom: 1rem;">Flagship Viewing Scheduled</h2>
+    <p style="font-size: 0.9rem; color: var(--ivory-muted); line-height: 1.6; margin-bottom: 1.5rem;">
+      Your private salon appointment has been recorded under confidential registry code:
+    </p>
+    <div style="background: var(--bg-surface-2); border: 1px dashed var(--gold-primary); padding: 1rem; font-family: var(--font-serif-royal); font-size: 1.4rem; color: #FFF6D6; letter-spacing: 0.15em; margin-bottom: 1.5rem;" id="confirmed-booking-id">
+      AJ-VIP-PROVENANCE
+    </div>
+    <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 2rem;">
+      Our Senior Client Director will reach you via private encrypted line within 2 hours to confirm your hospitality preferences and private security arrangements.
+    </p>
+    <button class="btn btn-gold modal-close-btn-action" style="width: 100%;">
+      Acknowledge & Return
+    </button>
+  </div>
+</div>

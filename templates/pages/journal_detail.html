@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ article.title }} – The Celestial Gazette | Aether Jewels{% endblock %}
+
+{% block content %}
+<div style="padding-top: calc(var(--header-height) + 2.5rem); padding-bottom: 7rem;">
+  <article class="container" style="max-width: 860px;">
+    
+    <!-- Breadcrumb -->
+    <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.16em; color: var(--text-muted); margin-bottom: 2rem;">
+      <a href="{% url 'atelier:home' %}">Atelier</a>
+      <span>/</span>
+      <a href="{% url 'atelier:journal' %}">Gazette</a>
+      <span>/</span>
+      <span style="color: var(--gold-light);">{{ article.category }}</span>
+    </div>
+
+    <!-- Article Header -->
+    <div style="text-align: center; margin-bottom: 3.5rem;">
+      <span class="section-tag">{{ article.category }} • {{ article.read_time }}</span>
+      <h1 style="font-size: clamp(2.2rem, 4vw, 3.2rem); margin-bottom: 1.25rem; color: #FFF6D6; line-height: 1.25;">
+        {{ article.title }}
+      </h1>
+      <div style="font-family: var(--font-serif-editorial); font-size: 1.15rem; font-style: italic; color: var(--gold-champagne); margin-bottom: 1rem;">
+        By {{ article.author }}
+      </div>
+      <div style="font-size: 0.78rem; color: var(--text-dim);">
+        Published on {{ article.published_date|date:"F d, Y" }} • Certified Haute Joaillerie Dossier
+      </div>
+    </div>
+
+    <!-- Article Hero Image -->
+    <div style="width: 100%; height: 460px; background: #0E0F16; border: 1px solid var(--gold-border); border-radius: var(--radius-sm); overflow: hidden; margin-bottom: 3.5rem;">
+      <img src="{{ article.cover_image }}" alt="{{ article.title }}" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+
+    <!-- Article Body Content -->
+    <div class="glass-card" style="padding: 3.5rem; font-size: 1.05rem; line-height: 1.9; color: var(--ivory-soft); margin-bottom: 4rem;">
+      <p class="lead" style="margin-bottom: 2rem;">
+        {{ article.snippet }}
+      </p>
+      
+      <div style="color: var(--ivory-muted);">
+        {{ article.content|safe }}
+      </div>
+
+      <div class="celestial-divider" style="margin: 3rem auto;">
+        <div class="line"></div>
+        <i class="ri-sparkling-fill star"></i>
+        <div class="line"></div>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: gap; padding-top: 1.5rem; border-top: 1px solid rgba(212, 175, 55, 0.15);">
+        <div style="font-size: 0.8rem; color: var(--text-muted);">
+          Share this chronicle:
+        </div>
+        <div style="display: flex; gap: 0.75rem;">
+          <button class="nav-action-btn" onclick="navigator.clipboard.writeText(window.location.href); window.showToast('Article URL copied to clipboard.', 'info');">
+            <i class="ri-links-line"></i>
+          </button>
+          <a href="https://wa.me/?text={{ article.title|urlencode }}%20{{ request.build_absolute_uri|urlencode }}" target="_blank" class="nav-action-btn">
+            <i class="ri-whatsapp-line"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Related Articles -->
+    {% if recent_articles %}
+    <div>
+      <h3 style="font-size: 1.4rem; color: #FFF6D6; margin-bottom: 1.5rem;">Further Chronicles</h3>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+        {% for ra in recent_articles %}
+        <a href="{% url 'atelier:journal_detail' ra.slug %}" class="glass-card" style="padding: 1.5rem; display: block;">
+          <span style="font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--gold-champagne);">{{ ra.category }}</span>
+          <h4 style="font-size: 1.05rem; margin-top: 0.35rem; color: var(--ivory-soft);">{{ ra.title }}</h4>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+  </article>
+</div>
+{% endblock %}

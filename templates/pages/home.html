@@ -1,0 +1,673 @@
+{% extends 'base.html' %}
+
+{% block title %}Aether Jewels – Celestial Atelier | Sovereign High Jewellery{% endblock %}
+
+{% block content %}
+<!-- ==========================================================================
+     1. CINEMATIC HERO SECTION
+     ========================================================================== -->
+<section class="hero-section">
+  <div class="hero-bg-overlay"></div>
+  <div class="container hero-content">
+    <div class="hero-badge">
+      <span class="badge-gold">
+        <i class="ri-sparkling-fill"></i> Purveyors of Sovereign High Jewellery Since 1928
+      </span>
+    </div>
+
+    <h1 class="hero-title">
+      Forged in Starlight.<br>
+      <span class="text-gold-gradient">Sculpted for Eternity.</span>
+    </h1>
+
+    <p class="hero-tagline">
+      An ultra-luxury digital flagship showcasing astronomical Golconda diamonds, unheated Kashmir sapphires, and one-of-a-kind wearable sculptures.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#masterpieces" class="btn btn-gold magnetic-btn">
+        <i class="ri-compass-3-line"></i> Explore Masterpieces
+      </a>
+      <a href="{% url 'atelier:bespoke' %}" class="btn btn-outline-gold magnetic-btn">
+        <i class="ri-palette-line"></i> Configure Bespoke Piece
+      </a>
+      <a href="{% url 'atelier:consultation' %}" class="btn btn-link-gold" style="margin-left: 0.5rem;">
+        Book Private Viewing &rarr;
+      </a>
+    </div>
+
+    <!-- Floating Centerpiece High Jewel -->
+    <div class="hero-floating-jewel">
+      <div class="hero-jewel-glow"></div>
+      {% if hero_product %}
+        <img src="{{ hero_product.image_primary }}" alt="{{ hero_product.title }}" class="hero-jewel-img">
+      {% else %}
+        <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1200&q=85" alt="Celestial Masterpiece" class="hero-jewel-img">
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="hero-scroll-indicator" onclick="document.querySelector('#brand-creed').scrollIntoView({behavior: 'smooth'})">
+    <span>Scroll to Discover</span>
+    <div class="scroll-line-anim"></div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     2. BRAND CREED & SOVEREIGN HERITAGE
+     ========================================================================== -->
+<section id="brand-creed" style="padding: 7rem 0; background: var(--bg-obsidian); position: relative; border-bottom: 1px solid var(--gold-border);">
+  <div class="container text-center" style="max-width: 920px;">
+    <span class="section-tag">The Celestial Creed</span>
+    <h2 style="font-size: clamp(2rem, 3.8vw, 3.2rem); margin-bottom: 1.5rem; line-height: 1.3;">
+      “We do not merely set gemstones; we capture the celestial alignment of the cosmos in pure sovereign gold.”
+    </h2>
+    <div class="celestial-divider">
+      <div class="line"></div>
+      <i class="ri-sparkling-fill star"></i>
+      <div class="line"></div>
+    </div>
+    <p class="lead" style="color: var(--ivory-muted); font-size: 1.15rem; line-height: 1.8;">
+      Rooted in four generations of royal jeweler heritage between the historic gemstone vaults of Jaipur, the diamond riverbeds of Golconda, and the haute joaillerie ateliers of Paris. Every creation is certified by GIA and stamped with the Sovereign BIS 916 Hallmark.
+    </p>
+
+    <div style="display: flex; justify-content: center; gap: 3.5rem; margin-top: 3.5rem; flex-wrap: wrap;">
+      <div>
+        <div style="font-family: var(--font-serif-royal); font-size: 2.4rem; color: var(--gold-light);">1928</div>
+        <div style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--text-muted); margin-top: 0.25rem;">Atelier Founded</div>
+      </div>
+      <div>
+        <div style="font-family: var(--font-serif-royal); font-size: 2.4rem; color: var(--gold-light);">100%</div>
+        <div style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--text-muted); margin-top: 0.25rem;">Type IIa & Natural Unheated</div>
+      </div>
+      <div>
+        <div style="font-family: var(--font-serif-royal); font-size: 2.4rem; color: var(--gold-light);">800+</div>
+        <div style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--text-muted); margin-top: 0.25rem;">Hours Per Masterpiece</div>
+      </div>
+      <div>
+        <div style="font-family: var(--font-serif-royal); font-size: 2.4rem; color: var(--gold-light);">5</div>
+        <div style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--text-muted); margin-top: 0.25rem;">Flagship VIP Salons</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     3. PINNED HORIZONTAL SCROLL PRODUCT SHOWCASE (GSAP SCROLLTRIGGER)
+     ========================================================================== -->
+<section id="masterpieces" class="horizontal-scroll-section">
+  <div class="horizontal-scroll-header">
+    <div>
+      <span class="section-tag">Curated High Jewellery</span>
+      <h2 style="font-size: 2.4rem; color: #FFF6D6;">The Sovereign Masterpieces</h2>
+      <p style="color: var(--text-muted); margin: 0;">Scroll down to traverse our marquee high jewellery suites.</p>
+    </div>
+    <div style="display: flex; align-items: center; gap: 1rem;">
+      <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--gold-champagne);">
+        <i class="ri-drag-move-fill"></i> Pinned Showcase
+      </span>
+      <a href="{% url 'atelier:product_list' %}" class="btn btn-outline-gold btn-sm">View All Jewels</a>
+    </div>
+  </div>
+
+  <div class="horizontal-scroll-wrapper">
+    {% for product in masterpieces %}
+    <div class="showcase-card">
+      <div class="showcase-img-pane">
+        <img src="{{ product.image_primary }}" alt="{{ product.title }}" loading="lazy">
+        <button class="card-vault-btn" 
+                data-product-id="{{ product.id }}" 
+                data-product-title="{{ product.title }}" 
+                data-product-price="{{ product.price_inr }}" 
+                data-product-image="{{ product.image_primary }}" 
+                data-product-url="{% url 'atelier:product_detail' product.slug %}"
+                data-product-specs="{{ product.carat_weight }}ct {{ product.primary_gemstone }}"
+                title="Archive to Private Vault">
+          <i class="ri-heart-3-line"></i>
+        </button>
+      </div>
+
+      <div class="showcase-content-pane">
+        <div>
+          <div class="showcase-gem-badge">{{ product.category.name }} • {{ product.certification }}</div>
+          <h3 class="showcase-title">{{ product.title }}</h3>
+          <p style="font-family: var(--font-serif-editorial); font-style: italic; color: var(--gold-light); font-size: 0.95rem; margin-bottom: 0.5rem;">
+            {{ product.subtitle }}
+          </p>
+
+          <div class="showcase-specs">
+            <div>
+              <div class="spec-label">Gemstone</div>
+              <div class="spec-val">{{ product.primary_gemstone|truncatechars:26 }}</div>
+            </div>
+            <div>
+              <div class="spec-label">Carat Weight</div>
+              <div class="spec-val">{{ product.carat_weight }} ct</div>
+            </div>
+            <div>
+              <div class="spec-label">Precious Metal</div>
+              <div class="spec-val">{{ product.get_metal_type_display }}</div>
+            </div>
+            <div>
+              <div class="spec-label">Origin Provenance</div>
+              <div class="spec-val">{{ product.gemstone_origin }}</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="showcase-price-row" style="margin-bottom: 1.25rem;">
+            <span style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.16em; color: var(--text-muted);">Sovereign Valuation</span>
+            <span class="showcase-price" data-price-inr="{{ product.price_inr }}">{{ product.formatted_price_inr }}</span>
+          </div>
+
+          <div style="display: flex; gap: 0.75rem;">
+            <a href="{% url 'atelier:product_detail' product.slug %}" class="btn btn-gold btn-sm" style="flex: 1;">
+              Inspect Piece
+            </a>
+            <button class="btn btn-outline-gold btn-sm card-quickview-btn" data-product-id="{{ product.id }}" style="position: static; width: auto; transform: none;">
+              <i class="ri-eye-line"></i> Quick Specs
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- ==========================================================================
+     4. INTERACTIVE BESPOKE ATELIER SIMULATOR TEASER
+     ========================================================================== -->
+<section style="padding: 7rem 0; background: radial-gradient(circle at 50% 50%, var(--bg-surface-2) 0%, var(--bg-obsidian) 80%); border-bottom: 1px solid var(--gold-border);">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Bespoke Haute Joaillerie</span>
+      <h2 class="section-title">Configure Your Celestial Relic</h2>
+      <p class="section-subtitle">
+        Interact with our real-time 3D gemstone facet simulator. Select astronomical gems, metals, and carats with live valuation in Indian Rupees.
+      </p>
+    </div>
+
+    <!-- 3D Configurator Suite Card -->
+    <div class="configurator-suite">
+      <!-- Left: Interactive Canvas -->
+      <div class="config-stage-pane">
+        <div class="stage-top-badge">
+          <span class="badge-gold"><i class="ri-3d-fill"></i> 3D Celestial Facet Engine</span>
+        </div>
+        <div class="stage-light-halo"></div>
+        <canvas id="gemstone-canvas"></canvas>
+        <div class="stage-controls-hint">
+          <i class="ri-cursor-line"></i> Click & Drag to Rotate Gemstone Under Starlight
+        </div>
+      </div>
+
+      <!-- Right: Real-time Customizer Controls -->
+      <div class="config-controls-pane">
+        <div>
+          <!-- Piece Type -->
+          <div class="config-section-title">
+            <span>1. Select Sovereign Piece</span>
+          </div>
+          <div class="config-options-grid">
+            <div class="config-option-card piece-type-btn active" data-value="Solitaire Ring">
+              <i class="ri-copper-diamond-line option-icon"></i>
+              <span class="option-name">Solitaire Ring</span>
+            </div>
+            <div class="config-option-card piece-type-btn" data-value="Celestial Pendant">
+              <i class="ri-shining-line option-icon"></i>
+              <span class="option-name">Pendant</span>
+            </div>
+            <div class="config-option-card piece-type-btn" data-value="Astral Choker">
+              <i class="ri-necklace-line option-icon"></i>
+              <span class="option-name">Astral Choker</span>
+            </div>
+          </div>
+
+          <!-- Gemstone -->
+          <div class="config-section-title">
+            <span>2. Select Celestial Gemstone</span>
+          </div>
+          <div class="config-options-grid">
+            <div class="config-option-card gem-option-btn active" data-value="Golconda Flawless Diamond">
+              <span class="option-name">Golconda Diamond</span>
+            </div>
+            <div class="config-option-card gem-option-btn" data-value="Kashmir Royal Blue Sapphire">
+              <span class="option-name">Kashmir Sapphire</span>
+            </div>
+            <div class="config-option-card gem-option-btn" data-value="Colombian Muzo Emerald">
+              <span class="option-name">Muzo Emerald</span>
+            </div>
+            <div class="config-option-card gem-option-btn" data-value="Burmese Pigeon Blood Ruby">
+              <span class="option-name">Burmese Ruby</span>
+            </div>
+          </div>
+
+          <!-- Precious Metal -->
+          <div class="config-section-title">
+            <span>3. Precious Metal</span>
+          </div>
+          <div class="config-options-grid">
+            <div class="config-option-card metal-option-btn active" data-value="18k Celestial Champagne Gold">
+              <span class="option-name">18k Champagne Gold</span>
+            </div>
+            <div class="config-option-card metal-option-btn" data-value="950 Pure Platinum">
+              <span class="option-name">950 Sovereign Platinum</span>
+            </div>
+            <div class="config-option-card metal-option-btn" data-value="18k Rose Gold">
+              <span class="option-name">18k Starlight Rose</span>
+            </div>
+          </div>
+
+          <!-- Carat Weight Slider -->
+          <div class="carat-slider-container">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span class="form-label" style="margin: 0;">Carat Weight</span>
+              <span id="carat-val-num" class="carat-val-display">4.50 ct</span>
+            </div>
+            <input type="range" id="carat-range-slider" class="luxury-slider" min="1.0" max="15.0" step="0.25" value="4.5">
+          </div>
+        </div>
+
+        <!-- Live Valuation & CTA -->
+        <div>
+          <div class="config-valuation-box">
+            <div>
+              <div class="valuation-label">Estimated Bespoke Valuation</div>
+              <div style="font-size: 0.75rem; color: var(--text-dim);">Includes GIA Master Certificate & BIS Hallmark</div>
+            </div>
+            <div id="config-price-estimate" class="valuation-amount">₹ 2.85 Cr</div>
+          </div>
+
+          <div style="display: flex; gap: 1rem;">
+            <a href="{% url 'atelier:bespoke' %}" class="btn btn-gold" style="flex: 1;">
+              <i class="ri-sparkling-2-line"></i> Full Atelier Suite & Commission
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     5. CRAFTSMANSHIP & ATELIER SCROLL STORYTELLING
+     ========================================================================== -->
+<section class="craft-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Sovereign Metier</span>
+      <h2 class="section-title">The Art of Celestial Goldsmithing</h2>
+      <p class="section-subtitle">
+        Every jewel traverses an uncompromising 800-hour journey across four sovereign milestones.
+      </p>
+    </div>
+
+    <!-- Step 1 -->
+    <div class="craft-step-row">
+      <div class="craft-content-pane">
+        <div class="craft-step-num">01</div>
+        <span class="section-tag">Ethical Provenance</span>
+        <h3 class="craft-step-title">Cosmic Gemstone Sourcing</h3>
+        <p style="color: var(--ivory-muted); line-height: 1.7; font-size: 0.95rem;">
+          Our master gemologists scour historic riverbeds and royal private vaults to procure stones of astronomical rarity: unheated Kashmir sapphires with natural silk rutile, D-Flawless Golconda Type IIa diamonds, and Muzo emeralds of vivid saturation.
+        </p>
+        <div style="margin-top: 1.5rem;">
+          <span class="badge-gold"><i class="ri-shield-check-line"></i> 100% Kimberley Process & Provenance Ledger</span>
+        </div>
+      </div>
+      <div class="craft-img-frame">
+        <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1000&q=85" alt="Gemstone Sourcing">
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="craft-step-row reverse">
+      <div class="craft-content-pane">
+        <div class="craft-step-num">02</div>
+        <span class="section-tag">4th Generation Ateliers</span>
+        <h3 class="craft-step-title">800-Hour Hand Forging</h3>
+        <p style="color: var(--ivory-muted); line-height: 1.7; font-size: 0.95rem;">
+          No 3D printing or cast assembly can emulate the acoustic and tactile warmth of hand-forged 950 Sovereign Platinum and 18k Champagne Gold. Our fourth-generation smiths in Jaipur and Mumbai hammer and calibrate metal to sub-millimeter tolerances.
+        </p>
+        <div style="margin-top: 1.5rem;">
+          <span class="badge-gold"><i class="ri-hammer-line"></i> Hand-Forged Ingot Metallurgy</span>
+        </div>
+      </div>
+      <div class="craft-img-frame">
+        <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1000&q=85" alt="Hand Forging">
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="craft-step-row">
+      <div class="craft-content-pane">
+        <div class="craft-step-num">03</div>
+        <span class="section-tag">Optical Precision</span>
+        <h3 class="craft-step-title">40x Micro-Pavé Starlight Alignment</h3>
+        <p style="color: var(--ivory-muted); line-height: 1.7; font-size: 0.95rem;">
+          Every accent diamond is faceted under 40x stereoscopic magnification. Stones are set using micro-bead prongs aligned to astronomical golden ratios, allowing light to cascade across the piece with zero optical dark spots.
+        </p>
+        <div style="margin-top: 1.5rem;">
+          <span class="badge-gold"><i class="ri-focus-2-line"></i> 40x Stereoscopic Precision</span>
+        </div>
+      </div>
+      <div class="craft-img-frame">
+        <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1000&q=85" alt="Micro-Pave Alignment">
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="craft-step-row reverse">
+      <div class="craft-content-pane">
+        <div class="craft-step-num">04</div>
+        <span class="section-tag">Sovereign Certification</span>
+        <h3 class="craft-step-title">Dual GIA & BIS 916 Sovereign Hallmark</h3>
+        <p style="color: var(--ivory-muted); line-height: 1.7; font-size: 0.95rem;">
+          Prior to entering the client vault, each masterpiece receives dual international certification from the Gemological Institute of America (GIA) and the Bureau of Indian Standards (BIS 916), accompanied by an encrypted provenance ledger.
+        </p>
+        <div style="margin-top: 1.5rem;">
+          <span class="badge-gold"><i class="ri-award-fill"></i> Lifetime Authentication Registry</span>
+        </div>
+      </div>
+      <div class="craft-img-frame">
+        <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1000&q=85" alt="Certification">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     6. CINEMATIC ATELIER FILM SHOWCASE
+     ========================================================================== -->
+<section class="cinema-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Cinema Joaillerie</span>
+      <h2 class="section-title">The Symphony of Molten Gold & Fire</h2>
+      <p class="section-subtitle">Experience the intimate rhythm of our master craftsmen at work.</p>
+    </div>
+
+    <div class="cinema-frame">
+      <video id="atelier-cinema-video" loop muted playsinline poster="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1600&q=85">
+        <source src="https://assets.mixkit.co/videos/42416/42416-720.mp4" type="video/mp4">
+        <source src="https://assets.mixkit.co/videos/42417/42417-720.mp4" type="video/mp4">
+        <source src="https://cdn.pixabay.com/video/2020/05/25/40130-424930032_large.mp4" type="video/mp4">
+        Your browser does not support video playback.
+      </video>
+
+      <div class="cinema-overlay-controls">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span class="badge-gold"><i class="ri-movie-line"></i> 4K Atelier Atmosphere</span>
+          <span style="font-size: 0.72rem; color: var(--gold-champagne); letter-spacing: 0.2em; text-transform: uppercase;">Aether Jewels Heritage Reel</span>
+        </div>
+
+        <button id="cinema-play-btn" class="cinema-play-btn" aria-label="Play Cinema Reel">
+          <i class="ri-play-fill"></i>
+        </button>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: var(--text-muted);">
+          <span>Filmed at Sovereign Ateliers, Jaipur & Mumbai</span>
+          <span>Soundscape Synced</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     7. FEATURED HIGH JEWELLERY CATALOG GRID
+     ========================================================================== -->
+<section style="padding: 7rem 0; background: var(--bg-surface-1); border-top: 1px solid var(--gold-border); border-bottom: 1px solid var(--gold-border);">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Sovereign Vault</span>
+      <h2 class="section-title">Celestial Solitaires & Heirlooms</h2>
+      <p class="section-subtitle">Explore selected high jewellery creations currently available for private viewing.</p>
+    </div>
+
+    <div class="product-grid">
+      {% for product in featured_products %}
+      <div class="product-card glass-card">
+        <div class="product-img-wrapper">
+          <img src="{{ product.image_primary }}" alt="{{ product.title }}" class="product-img-primary" loading="lazy">
+          {% if product.image_secondary %}
+            <img src="{{ product.image_secondary }}" alt="{{ product.title }} alternate" class="product-img-secondary" loading="lazy">
+          {% endif %}
+
+          <div class="card-floating-badge">
+            <span class="badge-gold">{{ product.carat_weight }} ct</span>
+          </div>
+
+          <button class="card-vault-btn" 
+                  data-product-id="{{ product.id }}" 
+                  data-product-title="{{ product.title }}" 
+                  data-product-price="{{ product.price_inr }}" 
+                  data-product-image="{{ product.image_primary }}" 
+                  data-product-url="{% url 'atelier:product_detail' product.slug %}"
+                  data-product-specs="{{ product.carat_weight }}ct {{ product.primary_gemstone }}"
+                  title="Save to Private Vault">
+            <i class="ri-heart-3-line"></i>
+          </button>
+
+          <button class="btn btn-gold btn-sm card-quickview-btn" data-product-id="{{ product.id }}">
+            <i class="ri-eye-line"></i> Quick Specs
+          </button>
+        </div>
+
+        <div class="product-card-body">
+          <div>
+            <div class="product-category-meta">{{ product.category.name }}</div>
+            <h3 class="product-card-title">
+              <a href="{% url 'atelier:product_detail' product.slug %}">{{ product.title }}</a>
+            </h3>
+            <p class="product-card-specs">
+              {{ product.primary_gemstone|truncatechars:38 }} • {{ product.get_metal_type_display }}
+            </p>
+          </div>
+
+          <div class="product-card-footer">
+            <span class="product-price-val" data-price-inr="{{ product.price_inr }}">{{ product.formatted_price_inr }}</span>
+            <a href="{% url 'atelier:product_detail' product.slug %}" class="btn btn-outline-gold btn-sm">Inspect</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div style="text-align: center; margin-top: 4rem;">
+      <a href="{% url 'atelier:product_list' %}" class="btn btn-gold btn-lg">
+        <i class="ri-layout-grid-line"></i> Browse Complete Sovereign Catalog ({{ total_products|default:"15+" }} Jewels)
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     8. PRESS & INTERNATIONAL CONNOISSEUR REVIEWS
+     ========================================================================== -->
+<section style="padding: 6rem 0; background: var(--bg-obsidian); border-bottom: 1px solid var(--gold-border);">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Haute Joaillerie Honors</span>
+      <h2 class="section-title">Critical Acclaim</h2>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+      {% for pq in press_quotes %}
+      <div class="glass-card" style="padding: 2.25rem; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+            <span class="badge-gold">{{ pq.badge_text }}</span>
+            <span style="font-size: 0.75rem; color: var(--gold-dark); font-family: var(--font-serif-royal);">{{ pq.year }}</span>
+          </div>
+          <p style="font-family: var(--font-serif-editorial); font-size: 1.15rem; font-style: italic; color: var(--ivory-soft); line-height: 1.6; margin-bottom: 1.5rem;">
+            “{{ pq.quote }}”
+          </p>
+        </div>
+        <div style="border-top: 1px solid rgba(212, 175, 55, 0.15); padding-top: 1rem;">
+          <div style="font-family: var(--font-serif-royal); font-size: 1.05rem; color: var(--gold-light);">{{ pq.publication }}</div>
+          <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.15em;">{{ pq.author_title }}</div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     9. PRIVATE VIP CONSULTATION RESERVATION SUITE
+     ========================================================================== -->
+<section id="consultation" class="consultation-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Private Salon Rendezvous</span>
+      <h2 class="section-title">Reserve a Private Consultation</h2>
+      <p class="section-subtitle">
+        Experience high jewellery in complete discretion at our Mumbai, Delhi, Jaipur, or Bangalore flagship suites, or via high-security encrypted virtual salon.
+      </p>
+    </div>
+
+    <div class="consultation-grid">
+      <!-- Left: Flagship Lounges Info -->
+      <div>
+        <h3 style="font-size: 1.4rem; margin-bottom: 0.75rem; color: #FFF6D6;">Select Sovereign Flagship</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+          Private champagne salons with high-resolution stereoscopic gemological analysis benches and dedicated Client Directors.
+        </p>
+
+        <div class="lounge-picker-grid">
+          {% for lounge in flagships %}
+          <div class="lounge-card-option {% if forloop.first %}selected{% endif %}" data-lounge="{{ lounge.lounge_name }}, {{ lounge.city }}">
+            <h4>{{ lounge.city }}</h4>
+            <p>{{ lounge.lounge_name }}</p>
+            <div style="font-size: 0.68rem; color: var(--gold-champagne); margin-top: 0.35rem;">{{ lounge.phone }}</div>
+          </div>
+          {% endfor %}
+        </div>
+
+        <div style="margin-top: 2rem; padding: 1.5rem; background: var(--bg-surface-2); border: 1px solid rgba(212, 175, 55, 0.15); border-radius: var(--radius-sm);">
+          <div style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--gold-light); margin-bottom: 0.5rem;">
+            <i class="ri-shield-keyhole-line"></i> Discretion & Security Protocol
+          </div>
+          <p style="font-size: 0.78rem; color: var(--text-muted); margin: 0; line-height: 1.55;">
+            All visits are strictly private, 1-on-1 appointments. Private armed courier transport and armored salon viewing rooms are coordinated by our Head of Client Security.
+          </p>
+        </div>
+      </div>
+
+      <!-- Right: Appointment Booking Form -->
+      <div>
+        <form id="consultation-booking-form">
+          <input type="hidden" id="city-lounge-input" name="city_lounge" value="The Bandra Celestial Suite, Mumbai">
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="client-fullname" class="form-label">Full Name & Salutation *</label>
+              <input type="text" id="client-fullname" name="full_name" required class="form-control" placeholder="e.g. Maharaja Vikramaditya / Lady Katherine">
+            </div>
+            <div class="form-group">
+              <label for="client-booking-email" class="form-label">Confidential Email *</label>
+              <input type="email" id="client-booking-email" name="email" required class="form-control" placeholder="client@sovereign.com">
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="client-booking-phone" class="form-label">Contact Phone (+91 Preferred) *</label>
+              <input type="tel" id="client-booking-phone" name="phone" required class="form-control" placeholder="+91 98200 XXXXX">
+            </div>
+            <div class="form-group">
+              <label for="jewellery-interest" class="form-label">High Jewellery Interest</label>
+              <select id="jewellery-interest" name="jewellery_interest" class="form-control">
+                <option value="Celestial High Jewellery Suites">Celestial High Jewellery Suites</option>
+                <option value="Bespoke Solitaire Engagement Ring">Bespoke Solitaire Engagement Ring</option>
+                <option value="Historic Golconda & Kashmir Gemstones">Historic Golconda & Kashmir Gemstones</option>
+                <option value="Royal Wedding & Bridal Trunk">Royal Wedding & Bridal Trunk</option>
+                <option value="Private Vault Heirloom Commission">Private Vault Heirloom Commission</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="booking-date" class="form-label">Preferred Date *</label>
+              <input type="date" id="booking-date" name="preferred_date" required class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="booking-time" class="form-label">Preferred Viewing Time Slot</label>
+              <select id="booking-time" name="preferred_time" class="form-control">
+                <option value="11:30 AM – Morning Private Salon">11:30 AM – Morning Private Salon</option>
+                <option value="03:30 PM – Afternoon Tea & Gemology">03:30 PM – Afternoon Tea & Gemology</option>
+                <option value="06:30 PM – Twilight Champagne Viewing">06:30 PM – Twilight Champagne Viewing</option>
+                <option value="08:30 PM – Late Evening Discretion Salon">08:30 PM – Late Evening Discretion Salon</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="hospitality-preference" class="form-label">Private Hospitality Preference</label>
+            <select id="hospitality-preference" name="hospitality_preference" class="form-control">
+              <option value="Dom Pérignon Vintage Champagne & Oscietra Caviar">Dom Pérignon Vintage Champagne & Oscietra Caviar</option>
+              <option value="Single Origin Makaibari Silver Needle White Tea">Single Origin Makaibari Silver Needle White Tea</option>
+              <option value="Artisanal Kashmiri Saffron & Almond Kahwa">Artisanal Kashmiri Saffron & Almond Kahwa</option>
+              <option value="Blue Mountain Jamaican Pour-Over Coffee">Blue Mountain Jamaican Pour-Over Coffee</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="booking-notes" class="form-label">Special Inquiries or Gemstone Requests</label>
+            <textarea id="booking-notes" name="notes" rows="3" class="form-control" placeholder="Share specific piece references, carat preferences, or security requirements..."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-gold btn-lg" style="width: 100%;">
+            <i class="ri-calendar-check-line"></i> Confirm Private Viewing Reservation
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     10. CELESTIAL GAZETTE JOURNAL TEASER
+     ========================================================================== -->
+<section style="padding: 6rem 0; background: var(--bg-obsidian);">
+  <div class="container">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem;">
+      <div>
+        <span class="section-tag">Haute Joaillerie Lore</span>
+        <h2 style="font-size: 2.2rem; color: #FFF6D6;">The Celestial Gazette</h2>
+      </div>
+      <a href="{% url 'atelier:journal' %}" class="btn btn-outline-gold btn-sm">Read All Chronicles</a>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem;">
+      {% for article in journal_articles %}
+      <article class="glass-card" style="display: flex; flex-direction: column; overflow: hidden;">
+        <div style="height: 220px; overflow: hidden; background: #0E0F16;">
+          <img src="{{ article.cover_image }}" alt="{{ article.title }}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease;">
+        </div>
+        <div style="padding: 1.75rem; display: flex; flex-direction: column; justify-content: space-between; flex-grow: 1;">
+          <div>
+            <div style="font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--gold-champagne); margin-bottom: 0.5rem;">
+              {{ article.category }} • {{ article.read_time }}
+            </div>
+            <h3 style="font-size: 1.25rem; margin-bottom: 0.75rem;">
+              <a href="{% url 'atelier:journal_detail' article.slug %}">{{ article.title }}</a>
+            </h3>
+            <p style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1.25rem;">
+              {{ article.snippet }}
+            </p>
+          </div>
+          <div>
+            <a href="{% url 'atelier:journal_detail' article.slug %}" class="btn-link-gold">Read Full Chronicle &rarr;</a>
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

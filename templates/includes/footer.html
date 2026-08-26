@@ -1,0 +1,98 @@
+<footer class="luxury-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <!-- Col 1: Brand & Philosophy -->
+      <div class="footer-brand-pane">
+        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem;">
+          <svg style="width: 28px; height: 28px;" viewBox="0 0 100 100" fill="none">
+            <path d="M50 0L56 38L94 44L62 60L74 96L50 72L26 96L38 60L6 44L44 38L50 0Z" fill="url(#goldGradFoot)" />
+            <circle cx="50" cy="50" r="8" fill="#FFF6D6" />
+            <defs>
+              <linearGradient id="goldGradFoot" x1="6" y1="0" x2="94" y2="96" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#FFF6D6" />
+                <stop offset="0.45" stop-color="#D4AF37" />
+                <stop offset="1" stop-color="#997929" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <div>
+            <div class="brand-name" style="font-size: 1.25rem; letter-spacing: 0.2em;">AETHER JEWELS</div>
+            <div class="brand-tagline" style="font-size: 0.55rem; letter-spacing: 0.28em;">Celestial Atelier</div>
+          </div>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; max-width: 320px;">
+          Purveyors of sovereign celestial high jewellery since 1928. Sculpting museum-grade relics with rare Golconda diamonds, unheated Kashmir sapphires, and ethical precious metals.
+        </p>
+
+        <!-- Hallmark Badges -->
+        <div class="footer-hallmarks-row">
+          <div class="hallmark-badge">
+            <i class="ri-shield-star-line"></i>
+            <span>GIA Certified</span>
+          </div>
+          <div class="hallmark-badge">
+            <i class="ri-award-line"></i>
+            <span>BIS 916 Hallmark</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Col 2: Flagship Lounges -->
+      <div>
+        <h4 class="footer-col-title">Flagship Salons</h4>
+        <ul class="footer-links-list">
+          <li><a href="{% url 'atelier:consultation' %}">Bandra Celestial Suite, Mumbai</a></li>
+          <li><a href="{% url 'atelier:consultation' %}">The Chanakya Private Salon, New Delhi</a></li>
+          <li><a href="{% url 'atelier:consultation' %}">Rambagh Palace Atelier, Jaipur</a></li>
+          <li><a href="{% url 'atelier:consultation' %}">Lavelle Road Sanctuary, Bangalore</a></li>
+          <li><a href="{% url 'atelier:consultation' %}">Encrypted Global Video Salon</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: The Maison -->
+      <div>
+        <h4 class="footer-col-title">The Maison</h4>
+        <ul class="footer-links-list">
+          <li><a href="{% url 'atelier:product_list' %}">High Jewellery Directory</a></li>
+          <li><a href="{% url 'atelier:collections' %}">Cosmic Collections</a></li>
+          <li><a href="{% url 'atelier:bespoke' %}">Bespoke 3D Atelier</a></li>
+          <li><a href="{% url 'atelier:heritage' %}">Craftsmanship & Provenance</a></li>
+          <li><a href="{% url 'atelier:journal' %}">Celestial Gazette</a></li>
+          <li><a href="{% url 'atelier:vault' %}">Private Client Vault</a></li>
+          <li><a href="{% url 'atelier:developer' %}"><i class="ri-code-s-slash-line text-gold"></i> About The Developer</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 4: Private Dispatch Newsletter -->
+      <div>
+        <h4 class="footer-col-title">Celestial Dispatch</h4>
+        <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+          Receive confidential invitations to private high jewellery previews and international salon rendezvous.
+        </p>
+        <form onsubmit="event.preventDefault(); window.showToast('Your subscription to the Private Gazette is confirmed.', 'success'); this.reset();">
+          <div style="display: flex; gap: 0.5rem;">
+            <input type="email" placeholder="Enter VIP Email Address" required class="form-control" style="padding: 0.75rem 1rem; font-size: 0.8rem;">
+            <button type="submit" class="btn btn-gold btn-sm" style="padding: 0.75rem 1.25rem;">Join</button>
+          </div>
+        </form>
+        <div style="margin-top: 1.5rem; font-size: 0.75rem; color: var(--text-dim);">
+          Direct Private Line: <strong style="color: var(--gold-champagne);">+91 22 8920 4400</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="footer-bottom-bar">
+      <div>
+        © 2026 Aether Jewels – Celestial Atelier. All Sovereign Rights Reserved.
+      </div>
+      <div style="display: flex; gap: 1.75rem; flex-wrap: wrap; align-items: center;">
+        <a href="{% url 'atelier:heritage' %}">Ethical Sourcing & Kimberley Process</a>
+        <a href="{% url 'atelier:consultation' %}">VIP Concierge Service</a>
+        <a href="{% url 'atelier:developer' %}" style="color: var(--gold-champagne); display: inline-flex; align-items: center; gap: 0.4rem;">
+          <i class="ri-user-star-line"></i> <span>Developer: Mohammed Bilal Mansuri</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>

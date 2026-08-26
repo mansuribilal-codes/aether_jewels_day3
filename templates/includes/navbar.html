@@ -1,0 +1,190 @@
+<header class="luxury-nav" id="luxury-header" role="banner">
+  <div class="container-fluid nav-container">
+
+    <!-- 1. LEFT ZONE: Brand Logo -->
+    <div class="nav-zone-left">
+      <a href="{% url 'atelier:home' %}" class="nav-brand" title="Aether Jewels – Celestial Atelier">
+        <svg class="brand-emblem-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- 8-Pointed Celestial Starlight Emblem -->
+          <path d="M50 0L56 38L94 44L62 60L74 96L50 72L26 96L38 60L6 44L44 38L50 0Z" fill="url(#goldGradNav)" />
+          <circle cx="50" cy="50" r="8" fill="#FFF6D6" />
+          <defs>
+            <linearGradient id="goldGradNav" x1="6" y1="0" x2="94" y2="96" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#FFF6D6" />
+              <stop offset="0.45" stop-color="#D4AF37" />
+              <stop offset="1" stop-color="#997929" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <div class="brand-text-block">
+          <span class="brand-name">Aether Jewels</span>
+          <span class="brand-tagline">Celestial Atelier</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- 2. CENTER ZONE: Navigation Menu Links (Desktop) -->
+    <nav class="nav-zone-center" aria-label="Main Navigation">
+      <ul class="nav-menu-list">
+        <li class="nav-menu-item">
+          <a href="{% url 'atelier:product_list' %}" class="nav-link">High Jewellery</a>
+        </li>
+        <li class="nav-menu-item">
+          <a href="{% url 'atelier:collections' %}" class="nav-link">Collections</a>
+        </li>
+        <li class="nav-menu-item">
+          <a href="{% url 'atelier:bespoke' %}" class="nav-link">Bespoke Atelier</a>
+        </li>
+        <li class="nav-menu-item">
+          <a href="{% url 'atelier:heritage' %}" class="nav-link">Heritage</a>
+        </li>
+        <li class="nav-menu-item">
+          <a href="{% url 'atelier:journal' %}" class="nav-link">Journal</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- 3. RIGHT ZONE: Utility Icons & VIP Patron Authentication -->
+    <div class="nav-zone-right">
+      <!-- Currency Switcher Trigger -->
+      <button class="nav-icon-btn currency-trigger-btn" title="Change Valuation Currency"
+        aria-label="Currency Selector">
+        <i class="ri-money-dollar-circle-line nav-icon-prefix"></i>
+        <span class="current-currency-symbol">INR</span>
+      </button>
+
+      <!-- Ambient Soundscape Switch -->
+      <button class="nav-icon-btn sound-toggle-btn" title="Toggle Celestial Soundscape"
+        aria-label="Toggle Ambient Audio">
+        <i class="ri-volume-mute-line"></i>
+      </button>
+
+      <!-- Private Vault Wishlist -->
+      <a href="{% url 'atelier:vault' %}" class="nav-icon-btn vault-nav-btn" title="Private Client Vault"
+        aria-label="Vault Wishlist">
+        <i class="ri-heart-3-line"></i>
+        <span class="badge-count vault-count-badge" style="display: none;">0</span>
+      </a>
+
+      <!-- VIP Patron Authentication State (Desktop) -->
+      {% if user.is_authenticated %}
+      <div class="nav-user-auth-wrap">
+        <span class="nav-user-pill" title="Signed in as {{ user.email }}">
+          <i class="ri-user-star-line text-gold"></i>
+          <span class="nav-user-name">{{ user.username }}</span>
+        </span>
+        <a href="{% url 'atelier:logout' %}" class="btn btn-outline-gold btn-sm nav-auth-btn" title="Sign Out">
+          <i class="ri-logout-box-r-line"></i> <span>Sign Out</span>
+        </a>
+      </div>
+      {% else %}
+      <div class="nav-guest-auth-wrap">
+        <a href="{% url 'atelier:login' %}" class="btn btn-outline-gold btn-sm nav-auth-btn nav-signin-btn">
+          <i class="ri-user-line"></i> <span>Sign In</span>
+        </a>
+        <a href="{% url 'atelier:register' %}" class="btn btn-gold btn-sm nav-auth-btn nav-register-btn d-none-1200">
+          <i class="ri-sparkling-fill"></i> <span>Register</span>
+        </a>
+      </div>
+      {% endif %}
+
+      <!-- VIP Consultation Gold CTA -->
+      <a href="{% url 'atelier:consultation' %}" class="btn btn-gold btn-sm nav-viewing-cta d-none-1100">
+        <i class="ri-calendar-line"></i> <span>Private Viewing</span>
+      </a>
+
+      <!-- Animated Luxury Mobile Hamburger Toggle -->
+      <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Open Navigation Drawer" aria-expanded="false" aria-controls="mobile-drawer">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+
+  </div>
+</header>
+
+<!-- Mobile Navigation Drawer -->
+<aside class="mobile-nav-drawer" id="mobile-drawer" role="dialog" aria-modal="true" aria-label="Mobile Navigation Drawer">
+  <div class="mobile-drawer-content">
+    <div class="mobile-drawer-header">
+      <div class="mobile-drawer-brand">
+        <svg class="mobile-drawer-logo" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+          <path d="M50 0L56 38L94 44L62 60L74 96L50 72L26 96L38 60L6 44L44 38L50 0Z" fill="#D4AF37" />
+          <circle cx="50" cy="50" r="8" fill="#FFF6D6" />
+        </svg>
+        <div class="mobile-drawer-title-wrap">
+          <span class="mobile-drawer-title">Aether Jewels</span>
+          <span class="mobile-drawer-subtitle">Celestial Atelier</span>
+        </div>
+      </div>
+      <button class="mobile-drawer-close" id="mobile-drawer-close" aria-label="Close Menu">
+        <i class="ri-close-line"></i>
+      </button>
+    </div>
+
+    <!-- Mobile VIP Patron Account Panel -->
+    <div class="mobile-patron-card">
+      {% if user.is_authenticated %}
+      <div class="mobile-patron-auth">
+        <div>
+          <div class="mobile-patron-badge">VIP Celestial Patron</div>
+          <div class="mobile-patron-name">{{ user.username }}</div>
+        </div>
+        <a href="{% url 'atelier:logout' %}" class="btn btn-outline-gold btn-sm mobile-patron-logout">
+          <i class="ri-logout-box-r-line"></i> Sign Out
+        </a>
+      </div>
+      {% else %}
+      <div class="mobile-patron-guest">
+        <div class="mobile-patron-guest-heading">Access Your Private Celestial Vault</div>
+        <div class="mobile-patron-guest-actions">
+          <a href="{% url 'atelier:login' %}" class="btn btn-outline-gold btn-sm">
+            <i class="ri-user-line"></i> Sign In
+          </a>
+          <a href="{% url 'atelier:register' %}" class="btn btn-gold btn-sm">
+            <i class="ri-sparkling-fill"></i> Register
+          </a>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Mobile Navigation Links -->
+    <ul class="mobile-nav-links">
+      <li><a href="{% url 'atelier:home' %}"><i class="ri-home-4-line text-gold"></i> <span>Celestial Flagship</span></a></li>
+      <li><a href="{% url 'atelier:product_list' %}"><i class="ri-gemini-line text-gold"></i> <span>High Jewellery Catalog</span></a></li>
+      <li><a href="{% url 'atelier:collections' %}"><i class="ri-compass-3-line text-gold"></i> <span>Sovereign Collections</span></a></li>
+      <li><a href="{% url 'atelier:bespoke' %}"><i class="ri-palette-line text-gold"></i> <span>Bespoke 3D Atelier</span></a></li>
+      <li><a href="{% url 'atelier:heritage' %}"><i class="ri-history-line text-gold"></i> <span>Atelier Heritage</span></a></li>
+      <li><a href="{% url 'atelier:journal' %}"><i class="ri-article-line text-gold"></i> <span>Celestial Gazette</span></a></li>
+      <li><a href="{% url 'atelier:vault' %}"><i class="ri-heart-3-line text-gold"></i> <span>Private Client Vault</span></a></li>
+      <li><a href="{% url 'atelier:developer' %}"><i class="ri-code-s-slash-line text-gold"></i> <span>About Developer</span></a></li>
+      <li class="mobile-cta-item">
+        <a href="{% url 'atelier:consultation' %}" class="mobile-cta-link">
+          <i class="ri-calendar-check-line"></i> <span>Reserve Private Viewing</span>
+        </a>
+      </li>
+    </ul>
+
+    <!-- Mobile Quick Utilities -->
+    <div class="mobile-drawer-utilities">
+      <button class="btn btn-outline-gold btn-sm currency-trigger-btn mobile-util-btn">
+        <i class="ri-money-dollar-circle-line"></i> Currency (<span class="current-currency-symbol">INR</span>)
+      </button>
+      <button class="btn btn-outline-gold btn-sm sound-toggle-btn mobile-util-btn">
+        <i class="ri-volume-mute-line"></i> Soundscape
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Drawer Footer -->
+  <div class="mobile-drawer-footer">
+    <div class="mobile-concierge-label">Private Concierge Direct</div>
+    <a href="tel:+912289204400" class="mobile-concierge-phone">+91 22 8920 4400</a>
+    <div class="mobile-concierge-cities">Mumbai • Delhi • Jaipur • Bangalore</div>
+  </div>
+</aside>
+
+<!-- Mobile Backdrop Overlay -->
+<div class="mobile-nav-backdrop" id="mobile-nav-backdrop" aria-hidden="true"></div>

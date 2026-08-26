@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ collection.name }} – Aether Jewels | Celestial Atelier{% endblock %}
+
+{% block content %}
+<div style="padding-top: calc(var(--header-height) + 2rem); padding-bottom: 7rem;">
+  <!-- Collection Hero -->
+  <div style="position: relative; min-height: 440px; display: flex; align-items: center; justify-content: center; text-align: center; background: url('{{ collection.cover_image }}') center/cover no-repeat; margin-bottom: 5rem; border-bottom: 1px solid var(--gold-border);">
+    <div style="position: absolute; inset: 0; background: radial-gradient(circle, rgba(11, 11, 15, 0.75) 0%, rgba(11, 11, 15, 0.95) 100%);"></div>
+    <div class="container" style="position: relative; z-index: 2; max-width: 860px; padding: 4rem 2rem;">
+      <span class="section-tag">High Jewellery Capsule</span>
+      <h1 style="font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 1rem; color: #FFF6D6;">{{ collection.name }}</h1>
+      <p style="font-family: var(--font-serif-editorial); font-size: 1.35rem; font-style: italic; color: var(--gold-light); line-height: 1.6; margin-bottom: 1.5rem;">
+        {{ collection.subtitle }}
+      </p>
+      <p style="color: var(--ivory-muted); line-height: 1.7; font-size: 0.95rem;">
+        {{ collection.curator_note }}
+      </p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem;">
+      <div>
+        <h2 style="font-size: 1.8rem; color: #FFF6D6;">Collection Pieces</h2>
+        <p style="color: var(--text-muted); margin: 0;">{{ products.count }} Sovereign Masterpieces</p>
+      </div>
+      <a href="{% url 'atelier:collections' %}" class="btn btn-outline-gold btn-sm">&larr; All Collections</a>
+    </div>
+
+    <div class="product-grid">
+      {% for product in products %}
+      <div class="product-card glass-card">
+        <div class="product-img-wrapper">
+          <img src="{{ product.image_primary }}" alt="{{ product.title }}" class="product-img-primary" loading="lazy">
+          {% if product.image_secondary %}
+            <img src="{{ product.image_secondary }}" alt="{{ product.title }} alternate" class="product-img-secondary" loading="lazy">
+          {% endif %}
+
+          <div class="card-floating-badge">
+            <span class="badge-gold">{{ product.carat_weight }} ct</span>
+          </div>
+
+          <button class="card-vault-btn" 
+                  data-product-id="{{ product.id }}" 
+                  data-product-title="{{ product.title }}" 
+                  data-product-price="{{ product.price_inr }}" 
+                  data-product-image="{{ product.image_primary }}" 
+                  data-product-url="{% url 'atelier:product_detail' product.slug %}"
+                  data-product-specs="{{ product.carat_weight }}ct {{ product.primary_gemstone }}"
+                  title="Save to Private Vault">
+            <i class="ri-heart-3-line"></i>
+          </button>
+
+          <button class="btn btn-gold btn-sm card-quickview-btn" data-product-id="{{ product.id }}">
+            <i class="ri-eye-line"></i> Quick Specs
+          </button>
+        </div>
+
+        <div class="product-card-body">
+          <div>
+            <div class="product-category-meta">{{ product.category.name }}</div>
+            <h3 class="product-card-title">
+              <a href="{% url 'atelier:product_detail' product.slug %}">{{ product.title }}</a>
+            </h3>
+            <p class="product-card-specs">
+              {{ product.primary_gemstone|truncatechars:38 }} • {{ product.get_metal_type_display }}
+            </p>
+          </div>
+
+          <div class="product-card-footer">
+            <span class="product-price-val" data-price-inr="{{ product.price_inr }}">{{ product.formatted_price_inr }}</span>
+            <a href="{% url 'atelier:product_detail' product.slug %}" class="btn btn-outline-gold btn-sm">Inspect</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

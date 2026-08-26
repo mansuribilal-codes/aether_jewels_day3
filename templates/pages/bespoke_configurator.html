@@ -1,0 +1,209 @@
+{% extends 'base.html' %}
+
+{% block title %}Bespoke Atelier – Aether Jewels | Celestial Atelier{% endblock %}
+
+{% block content %}
+<div style="padding-top: calc(var(--header-height) + 2.5rem); padding-bottom: 7rem;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">High Jewellery Haute Couture</span>
+      <h1 class="section-title">The Bespoke Celestial Atelier</h1>
+      <p class="section-subtitle">
+        Commission an immortal wearable sculpture sculpted to your exact astronomical specifications.
+      </p>
+    </div>
+
+    <!-- 3D Configurator Suite -->
+    <div class="configurator-suite" style="margin-bottom: 5rem;">
+      <!-- Left: Interactive Canvas 3D Stage -->
+      <div class="config-stage-pane">
+        <div class="stage-top-badge">
+          <span class="badge-gold"><i class="ri-3d-fill"></i> Real-time 3D Facet & Light Simulation</span>
+        </div>
+        <div class="stage-light-halo"></div>
+        <canvas id="gemstone-canvas"></canvas>
+        <div class="stage-controls-hint">
+          <i class="ri-cursor-line"></i> Drag to rotate jewel • Real-time dispersion lighting
+        </div>
+      </div>
+
+      <!-- Right: Customizer Controls Panel -->
+      <div class="config-controls-pane">
+        <div>
+          <!-- 1. Piece Architecture -->
+          <div class="config-section-title">
+            <span>1. Sovereign Architecture</span>
+          </div>
+          <div class="config-options-grid">
+            <div class="config-option-card piece-type-btn active" data-value="High Jewellery Solitaire Ring">
+              <i class="ri-copper-diamond-line option-icon"></i>
+              <span class="option-name">Solitaire Ring</span>
+            </div>
+            <div class="config-option-card piece-type-btn" data-value="Celestial Pendant">
+              <i class="ri-shining-line option-icon"></i>
+              <span class="option-name">Celestial Pendant</span>
+            </div>
+            <div class="config-option-card piece-type-btn" data-value="Astral Choker / Collar">
+              <i class="ri-necklace-line option-icon"></i>
+              <span class="option-name">Astral Choker</span>
+            </div>
+            <div class="config-option-card piece-type-btn" data-value="Sovereign Royal Cuff">
+              <i class="ri-circle-line option-icon"></i>
+              <span class="option-name">Royal Cuff</span>
+            </div>
+          </div>
+
+          <!-- 2. Gemstone Selection -->
+          <div class="config-section-title">
+            <span>2. Core Celestial Gemstone</span>
+          </div>
+          <div class="config-options-grid">
+            <div class="config-option-card gem-option-btn active" data-value="Golconda Flawless Diamond">
+              <span class="option-name">Golconda Diamond (D-FL)</span>
+            </div>
+            <div class="config-option-card gem-option-btn" data-value="Kashmir Royal Blue Sapphire">
+              <span class="option-name">Kashmir Sapphire (Unheated)</span>
+            </div>
+            <div class="config-option-card gem-option-btn" data-value="Colombian Muzo Emerald">
+              <span class="option-name">Muzo Emerald (Vivid)</span>
+            </div>
+            <div class="config-option-card gem-option-btn" data-value="Burmese Pigeon Blood Ruby">
+              <span class="option-name">Burmese Ruby (Pigeon Blood)</span>
+            </div>
+            <div class="config-option-card gem-option-btn" data-value="Australian Black Opal">
+              <span class="option-name">Australian Black Opal</span>
+            </div>
+          </div>
+
+          <!-- 3. Precious Metal -->
+          <div class="config-section-title">
+            <span>3. Sovereign Metal Alloy</span>
+          </div>
+          <div class="config-options-grid">
+            <div class="config-option-card metal-option-btn active" data-value="18k Celestial Champagne Gold">
+              <span class="option-name">18k Champagne Gold</span>
+            </div>
+            <div class="config-option-card metal-option-btn" data-value="950 Pure Platinum">
+              <span class="option-name">950 Sovereign Platinum</span>
+            </div>
+            <div class="config-option-card metal-option-btn" data-value="18k Rose Gold">
+              <span class="option-name">18k Starlight Rose</span>
+            </div>
+            <div class="config-option-card metal-option-btn" data-value="18k Midnight Black Rhodium">
+              <span class="option-name">18k Black Rhodium</span>
+            </div>
+          </div>
+
+          <!-- 4. Setting Style -->
+          <div class="config-section-title">
+            <span>4. Setting Style & Mount</span>
+          </div>
+          <div class="config-options-grid">
+            <div class="config-option-card setting-option-btn active" data-value="Astral Halo">
+              <span class="option-name">Astral Halo</span>
+            </div>
+            <div class="config-option-card setting-option-btn" data-value="Constellation Prong">
+              <span class="option-name">Constellation Prong</span>
+            </div>
+            <div class="config-option-card setting-option-btn" data-value="Celestial Bezel">
+              <span class="option-name">Celestial Bezel</span>
+            </div>
+            <div class="config-option-card setting-option-btn" data-value="Royal Pavé Cascade">
+              <span class="option-name">Royal Pavé Cascade</span>
+            </div>
+          </div>
+
+          <!-- 5. Carat Weight Slider -->
+          <div class="carat-slider-container">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span class="form-label" style="margin: 0;">Carat Weight Specification</span>
+              <span id="carat-val-num" class="carat-val-display">4.50 ct</span>
+            </div>
+            <input type="range" id="carat-range-slider" class="luxury-slider" min="1.0" max="15.0" step="0.25" value="4.5">
+          </div>
+        </div>
+
+        <!-- Live Valuation Output -->
+        <div>
+          <div class="config-valuation-box">
+            <div>
+              <div class="valuation-label">Estimated Bespoke Valuation</div>
+              <div style="font-size: 0.75rem; color: var(--text-dim);">Includes GIA Master Certification & BIS 916 Sovereign Hallmark</div>
+            </div>
+            <div id="config-price-estimate" class="valuation-amount">₹ 2.85 Cr</div>
+          </div>
+
+          <!-- Commission Dispatch Form -->
+          <form id="bespoke-inquiry-form" style="margin-top: 1.5rem;">
+            <div class="form-row-2">
+              <div class="form-group">
+                <input type="text" id="client-name" class="form-control" placeholder="Your Full Name *" required>
+              </div>
+              <div class="form-group">
+                <input type="email" id="client-email" class="form-control" placeholder="Confidential Email *" required>
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <input type="tel" id="client-phone" class="form-control" placeholder="Phone (+91 XXXXX XXXXX) *" required>
+              </div>
+              <div class="form-group">
+                <input type="text" id="custom-engraving" class="form-control" placeholder="Optional Celestial Engraving">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <textarea id="bespoke-notes" class="form-control" rows="2" placeholder="Specific diamond cut, bezel details, or private vault consultation requirements..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-gold btn-lg" style="width: 100%;">
+              <i class="ri-sparkling-fill"></i> Dispatch Commission Request to Master Goldsmith
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bespoke Process Journey -->
+    <div class="section-header" style="margin-top: 6rem;">
+      <span class="section-tag">The Bespoke Commission</span>
+      <h2 class="section-title">How Your Creation Comes to Life</h2>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+      <div class="glass-card" style="padding: 2.25rem;">
+        <div style="font-family: var(--font-serif-royal); font-size: 2.5rem; color: rgba(212, 175, 55, 0.3); margin-bottom: 0.75rem;">I</div>
+        <h3 style="font-size: 1.25rem; margin-bottom: 0.75rem; color: #FFF6D6;">Private Gemological Salon</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+          You meet with our Master Gemologist in Mumbai, Delhi, Jaipur, or virtually to inspect loose certified rough stones under polarized starlight lamps.
+        </p>
+      </div>
+
+      <div class="glass-card" style="padding: 2.25rem;">
+        <div style="font-family: var(--font-serif-royal); font-size: 2.5rem; color: rgba(212, 175, 55, 0.3); margin-bottom: 0.75rem;">II</div>
+        <h3 style="font-size: 1.25rem; margin-bottom: 0.75rem; color: #FFF6D6;">Hand-Painted Gouache</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+          Our Parisian-trained jewellery artists hand-paint 1:1 gouache renderings on midnight parchment depicting the piece from three optical angles.
+        </p>
+      </div>
+
+      <div class="glass-card" style="padding: 2.25rem;">
+        <div style="font-family: var(--font-serif-royal); font-size: 2.5rem; color: rgba(212, 175, 55, 0.3); margin-bottom: 0.75rem;">III</div>
+        <h3 style="font-size: 1.25rem; margin-bottom: 0.75rem; color: #FFF6D6;">800-Hour Hand Forging</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+          Master smiths forge the solid platinum or champagne gold basket, setting every accent diamond under 40x stereoscopic magnification.
+        </p>
+      </div>
+
+      <div class="glass-card" style="padding: 2.25rem;">
+        <div style="font-family: var(--font-serif-royal); font-size: 2.5rem; color: rgba(212, 175, 55, 0.3); margin-bottom: 0.75rem;">IV</div>
+        <h3 style="font-size: 1.25rem; margin-bottom: 0.75rem; color: #FFF6D6;">Sovereign Handover</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+          Delivered in a handcrafted Italian calfskin and brass celestial trunk with dual GIA certification and encrypted provenance ledger.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
