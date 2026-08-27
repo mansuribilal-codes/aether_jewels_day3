@@ -5,7 +5,7 @@
 [![GSAP](https://img.shields.io/badge/GSAP-3.12.5%20ScrollTrigger-88CE02?style=for-the-badge&logo=greensock&logoColor=white)](https://greensock.com/gsap/)
 [![Aesthetic](https://img.shields.io/badge/Aesthetic-Obsidian%20%26%20Champagne%20Gold-D4AF37?style=for-the-badge)](https://aetherjewels.com)
 
-Visit Demo **[aether-jewels-day3.onrender.com](aether-jewels-day3.onrender.com)** in your browser.
+Visit Demo [https://aether-jewels-day3.onrender.com/](https://aether-jewels-day3.onrender.com/) in your browser.
 
 ---
 
