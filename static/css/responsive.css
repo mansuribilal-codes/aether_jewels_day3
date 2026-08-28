@@ -2,254 +2,95 @@
    AETHER JEWELS • CELESTIAL ATELIER – RESPONSIVE STYLES
    ========================================================================== */
 
-/* ==========================================================================
-   1. DESKTOP SCREENS (> 1150px) – NON-OVERLAPPING FLEXBOX ARCHITECTURE
-   ========================================================================== */
-@media (min-width: 1151px) {
-  :root {
-    --header-height: 90px;
-  }
-
-  .luxury-nav {
-    height: var(--header-height);
-  }
-
-  .luxury-nav.scrolled {
-    height: 76px;
-  }
-
+/* 1366px Laptop & Standard Desktops */
+@media (max-width: 1400px) {
   .nav-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 clamp(1.25rem, 2.5vw, 3.5rem);
-    gap: clamp(0.75rem, 1.5vw, 2rem);
-    width: 100%;
-    box-sizing: border-box;
+    padding: 0 1.5rem;
+    gap: 1.25rem;
   }
-
-  .nav-zone-left {
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
-  }
-
-  .nav-zone-center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex: 1 1 auto;
-    min-width: 0;
-  }
-
   .nav-menu-list {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: clamp(0.85rem, 1.4vw, 2.25rem);
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    gap: 1.35rem;
   }
-
-  .nav-zone-right {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    flex-shrink: 0;
-    gap: clamp(0.35rem, 0.6vw, 0.65rem);
-  }
-
-  .mobile-nav-toggle {
-    display: none !important;
-  }
-
-  .nav-user-auth-wrap {
-    display: inline-flex;
-  }
-
-  .nav-guest-auth-wrap {
-    display: inline-flex;
-  }
-
-  .nav-signin-btn {
-    display: inline-flex;
-  }
-
-  .mobile-nav-drawer,
-  .mobile-nav-backdrop {
-    display: none !important;
-  }
-}
-
-/* Compact Laptop Screens (1151px – 1340px) */
-@media (min-width: 1151px) and (max-width: 1340px) {
-  .nav-container {
-    padding: 0 1.25rem;
-    gap: 0.75rem;
-  }
-
-  .nav-menu-list {
-    gap: clamp(0.65rem, 1vw, 1.15rem);
-  }
-
   .nav-link {
-    font-size: 0.68rem;
-    letter-spacing: 0.09em;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
   }
-
   .brand-name {
-    font-size: 1.02rem;
-    letter-spacing: 0.12em;
+    font-size: 1.08rem;
+    letter-spacing: 0.15em;
   }
-
-  .brand-tagline {
-    font-size: 0.46rem;
-    letter-spacing: 0.24em;
+  .nav-zone-right {
+    gap: 0.5rem;
   }
-
-  .nav-register-btn {
-    display: none !important;
-  }
-
-  .nav-viewing-cta {
-    display: none !important;
-  }
-
   .nav-auth-btn {
-    padding: 0.38rem 0.65rem;
-    font-size: 0.67rem;
+    padding: 0.45rem 0.75rem;
+    font-size: 0.7rem;
   }
-
-  .currency-trigger-btn {
-    padding: 0 0.5rem;
-    font-size: 0.66rem;
-  }
-}
-
-/* Mid Laptops & Monitors (1341px – 1480px) */
-@media (min-width: 1341px) and (max-width: 1480px) {
-  .nav-menu-list {
-    gap: 1.45rem;
-  }
-
-  .nav-link {
-    font-size: 0.71rem;
-    letter-spacing: 0.12em;
-  }
-
-  .nav-register-btn {
-    display: none !important;
-  }
-
-  .nav-viewing-cta {
-    display: inline-flex !important;
-    padding: 0.42rem 0.85rem;
-    font-size: 0.68rem;
-  }
-
   .showcase-card {
     width: 600px;
     height: 430px;
   }
-
   .craft-step-row {
     gap: 3rem;
   }
 }
 
-/* Large Desktops (> 1480px) */
-@media (min-width: 1481px) {
+@media (max-width: 1200px) {
+  .d-none-1200 {
+    display: none !important;
+  }
   .nav-menu-list {
-    gap: 2.2rem;
+    gap: 1rem;
   }
-
-  .nav-register-btn {
-    display: inline-flex !important;
-  }
-
-  .nav-viewing-cta {
-    display: inline-flex !important;
-  }
-}
-
-/* ==========================================================================
-   2. TABLET & LAPTOP COLLAPSE (<= 1150px)
-   ========================================================================== */
-@media (max-width: 1150px) {
-  :root {
-    --header-height: 76px;
-  }
-
-  .luxury-nav {
-    height: var(--header-height);
-  }
-
-  .luxury-nav.scrolled {
-    height: 68px;
-  }
-
-  .nav-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 clamp(1rem, 2.5vw, 1.75rem);
-    gap: 0.75rem;
-  }
-
-  .nav-zone-center {
-    display: none !important;
-  }
-
-  .nav-user-auth-wrap,
-  .nav-guest-auth-wrap,
-  .nav-viewing-cta,
-  .nav-auth-btn,
-  .nav-register-btn,
-  .d-none-1200,
-  .d-none-1100 {
-    display: none !important;
-  }
-
-  .mobile-nav-toggle {
-    display: flex !important;
-  }
-
-  .mobile-nav-drawer,
-  .mobile-nav-backdrop {
-    display: flex;
-  }
-
   .consultation-grid {
     grid-template-columns: 1fr;
     gap: 2.5rem;
     padding: 2.5rem;
   }
-
   .configurator-suite {
     grid-template-columns: 1fr;
   }
-
   .config-stage-pane {
     border-right: none;
     border-bottom: 1px solid var(--gold-border);
   }
-
   .footer-grid {
     grid-template-columns: 1fr 1fr;
     gap: 2.5rem;
   }
+}
 
+@media (max-width: 1100px) {
+  .d-none-1100 {
+    display: none !important;
+  }
+}
+
+/* Tablet Screens (1024px and below) */
+@media (max-width: 992px) {
+  :root {
+    --header-height: 76px;
+  }
+  .nav-container {
+    padding: 0 1.25rem;
+  }
+  .nav-zone-center {
+    display: none;
+  }
+  .mobile-nav-toggle {
+    display: flex;
+  }
+  .nav-user-auth-wrap {
+    display: none;
+  }
   .showcase-card {
     grid-template-columns: 1fr;
-    width: 380px;
+    width: 360px;
     height: auto;
   }
-
   .showcase-img-pane {
     height: 240px;
   }
-
   .craft-step-row,
   .craft-step-row:nth-child(even) {
     grid-template-columns: 1fr;
@@ -257,194 +98,316 @@
     gap: 2rem;
     margin-bottom: 3.5rem;
   }
-
   .craft-img-frame img {
     height: 280px;
   }
-
   .product-grid {
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 1.5rem;
   }
-
-  /* Disable Custom Cursor on Touch Devices */
   .custom-cursor-dot,
   .custom-cursor-ring {
     display: none !important;
   }
-}
 
-/* ==========================================================================
-   3. MOBILE SCREENS (<= 768px)
-   ========================================================================== */
-@media (max-width: 768px) {
-  .container,
-  .container-fluid {
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
-    box-sizing: border-box;
-    width: 100%;
-    max-width: 100%;
+  /* Product Details Tablet Layout */
+  .product-detail-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    margin-bottom: 4.5rem;
+  }
+  .product-info-pane {
+    position: static;
+  }
+  .product-narrative-card {
+    padding: 2.5rem;
+    margin-bottom: 4.5rem;
+  }
+  .product-narrative-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .product-story-goldsmith {
+    border-left: none;
+    border-top: 1px solid rgba(212, 175, 55, 0.2);
+    padding-left: 0;
+    padding-top: 2rem;
   }
 
+  /* Collections, Heritage, Journal 2-column layouts */
+  .collection-showcase-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .collection-showcase-img {
+    height: 340px;
+  }
+  .collection-showcase-body {
+    padding: 2.25rem 2rem;
+  }
+  .heritage-chapter-row,
+  .heritage-chapter-row.reverse {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .journal-lead-card {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .journal-lead-img {
+    height: 300px;
+  }
+  .journal-lead-body {
+    padding: 2rem;
+  }
+}
+
+/* Mobile Screens (768px and below) */
+@media (max-width: 768px) {
+  .container, .container-fluid {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
   .d-none-mobile {
     display: none !important;
   }
-
   .hero-section {
     min-height: auto;
     padding-top: calc(var(--header-height) + 1.5rem);
     padding-bottom: 3rem;
   }
-
   .hero-actions {
     flex-direction: column;
     width: 100%;
   }
-
   .hero-actions .btn {
     width: 100%;
     justify-content: center;
   }
-
   .hero-floating-jewel {
     height: 180px;
     margin-top: 1.75rem;
   }
-
   .hero-jewel-img {
     max-height: 180px;
   }
-
   .horizontal-scroll-section {
     padding: 3.5rem 0;
   }
-
   .horizontal-scroll-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
     padding: 0 1.25rem 1rem 1.25rem;
   }
-
   .horizontal-scroll-wrapper {
     padding: 1rem 1.25rem 2rem 1.25rem;
     gap: 1.5rem;
   }
-
   .showcase-card {
     width: 300px;
   }
-
   .showcase-content-pane {
     padding: 1.5rem;
   }
-
   .craft-section {
     padding: 3.5rem 0;
   }
-
   .cinema-section {
     padding: 3.5rem 0;
   }
-
   .cinema-play-btn {
     width: 60px;
     height: 60px;
     font-size: 1.6rem;
   }
-
   .consultation-section {
     padding: 3.5rem 0;
   }
-
   .consultation-grid {
     padding: 1.5rem;
   }
-
   .lounge-picker-grid,
   .form-row-2 {
     grid-template-columns: 1fr;
   }
-
   .footer-grid {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
-
   .footer-bottom-bar {
     flex-direction: column;
     gap: 1rem;
     text-align: center;
   }
-
   .config-controls-pane {
     padding: 1.5rem;
   }
-
   .config-valuation-box {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
   }
+
+  /* Product Details Mobile Optimization */
+  .product-detail-wrap {
+    padding-top: calc(var(--header-height) + 1.25rem);
+    padding-bottom: 4rem;
+  }
+  .detail-breadcrumbs {
+    font-size: 0.7rem;
+    margin-bottom: 1.5rem;
+    gap: 0.35rem 0.5rem;
+  }
+  .product-detail-grid {
+    gap: 2rem;
+    margin-bottom: 3.5rem;
+  }
+  .product-hero-title {
+    font-size: 1.85rem;
+  }
+  .product-hero-subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 1.25rem;
+  }
+  .product-valuation-card {
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+  .valuation-amount {
+    font-size: 1.6rem;
+  }
+  .product-actions-group {
+    margin-bottom: 2rem;
+  }
+  .product-secondary-actions {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .product-secondary-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .product-dossier-card {
+    padding: 1.35rem;
+  }
+  .product-narrative-card {
+    padding: 1.75rem;
+    margin-bottom: 3.5rem;
+  }
+  .product-narrative-grid {
+    gap: 1.75rem;
+  }
+  .collection-showcase-img {
+    height: 260px;
+  }
+  .collection-showcase-body {
+    padding: 1.75rem 1.25rem;
+  }
+  .collection-showcase-body h2 {
+    font-size: 1.85rem !important;
+  }
+  .journal-lead-img {
+    height: 220px;
+  }
+  .journal-lead-body {
+    padding: 1.5rem;
+  }
+  .journal-lead-body h2 {
+    font-size: 1.5rem !important;
+  }
+  .journal-hero-cover {
+    height: 260px;
+    margin-bottom: 2rem;
+  }
+  .journal-body-card {
+    padding: 1.75rem;
+    margin-bottom: 3rem;
+  }
+  .journal-related-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 }
 
-/* ==========================================================================
-   4. SMALL MOBILE SCREENS (<= 480px)
-   ========================================================================== */
-@media (max-width: 480px) {
+
+/* Small Mobile Screens (425px and below) */
+@media (max-width: 425px) {
   .nav-container {
     padding: 0 0.85rem;
-    gap: 0.4rem;
+    gap: 0.5rem;
   }
-
   .brand-name {
-    font-size: 0.95rem;
+    font-size: 0.98rem;
     letter-spacing: 0.12em;
   }
-
   .brand-tagline {
     display: none;
   }
-
   .brand-emblem-svg {
     width: 22px;
     height: 22px;
   }
-
   .nav-icon-btn {
     width: 34px;
     height: 34px;
     font-size: 0.88rem;
   }
-
   .currency-trigger-btn {
-    padding: 0 0.45rem;
-    font-size: 0.66rem;
+    padding: 0 0.5rem;
+    font-size: 0.68rem;
   }
-
-  .currency-trigger-btn .nav-icon-prefix {
-    display: none;
-  }
-
   .mobile-nav-drawer {
-    max-width: 100vw;
+    max-width: 100%;
     border-left: none;
   }
-
   .product-grid {
     grid-template-columns: 1fr;
   }
-
   .hero-title {
-    font-size: 2.1rem;
+    font-size: 2.2rem;
   }
-
   .hero-tagline {
     font-size: 1rem;
   }
-
   .section-title {
     font-size: 1.75rem;
   }
+
+  /* Compact Product Details for extra-small screens */
+  .detail-breadcrumbs {
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+  }
+  .product-hero-title {
+    font-size: 1.5rem;
+  }
+  .product-cert-badge {
+    top: 1rem;
+    left: 1rem;
+  }
+  .product-thumbs-grid {
+    gap: 0.5rem;
+  }
+  .valuation-top-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+  .valuation-amount {
+    font-size: 1.45rem;
+  }
+  .valuation-bottom-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+  }
+  .dossier-specs-grid {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+  .dossier-span-2 {
+    grid-column: span 1;
+  }
 }
+
