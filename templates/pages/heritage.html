@@ -19,7 +19,7 @@
     <div style="display: flex; flex-direction: column; gap: 5rem; margin-bottom: 6rem;">
       
       <!-- Chapter 1 -->
-      <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; align-items: center;">
+      <div class="heritage-chapter-row">
         <div class="craft-img-frame">
           <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1000&q=85" alt="1928 Legacy">
         </div>
@@ -36,7 +36,7 @@
       </div>
 
       <!-- Chapter 2 -->
-      <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items: center;">
+      <div class="heritage-chapter-row reverse">
         <div>
           <span class="section-tag">1964 • The Paris Rendezvous</span>
           <h2 style="font-size: 2.2rem; margin-bottom: 1rem; color: #FFF6D6;">Haute Joaillerie Fusion</h2>
@@ -53,7 +53,7 @@
       </div>
 
       <!-- Chapter 3 -->
-      <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; align-items: center;">
+      <div class="heritage-chapter-row">
         <div class="craft-img-frame">
           <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1000&q=85" alt="Ethical Sourcing">
         </div>
@@ -63,7 +63,7 @@
           <p style="color: var(--ivory-muted); line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.25rem;">
             Today, Aether Jewels operates as an exclusive high jewellery atelier catering to discerning global connoisseurs. Every diamond is certified by GIA, strictly 100% compliant with the Kimberley Process, and set in 100% recycled 950 Sovereign Platinum or BIS 916 Hallmarked Gold.
           </p>
-          <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+          <div style="display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;">
             <a href="{% url 'atelier:product_list' %}" class="btn btn-gold">Explore Masterpieces</a>
             <a href="{% url 'atelier:consultation' %}" class="btn btn-outline-gold">Reserve Flagship Viewing</a>
           </div>
