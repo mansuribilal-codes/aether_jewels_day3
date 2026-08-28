@@ -15,15 +15,15 @@
 
     <div style="display: flex; flex-direction: column; gap: 4.5rem; margin-top: 4rem;">
       {% for collection in collections %}
-      <div class="glass-card" style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; overflow: hidden; align-items: center;">
-        <div style="height: 480px; position: relative; background: #0E0F16; overflow: hidden;">
+      <div class="glass-card collection-showcase-row">
+        <div class="collection-showcase-img">
           <img src="{{ collection.cover_image }}" alt="{{ collection.name }}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease;">
           <div style="position: absolute; top: 1.5rem; left: 1.5rem;">
             <span class="badge-gold"><i class="ri-sparkling-fill"></i> Sovereign Capsule</span>
           </div>
         </div>
 
-        <div style="padding: 3rem 3.5rem 3rem 0;">
+        <div class="collection-showcase-body">
           <span class="section-tag">Chapter 0{{ forloop.counter }}</span>
           <h2 style="font-size: 2.4rem; margin-bottom: 1rem; color: #FFF6D6;">{{ collection.name }}</h2>
           <p style="font-family: var(--font-serif-editorial); font-size: 1.25rem; font-style: italic; color: var(--gold-light); margin-bottom: 1.25rem; line-height: 1.5;">
@@ -36,7 +36,7 @@
             {{ collection.description }}
           </p>
 
-          <div style="display: flex; gap: 1rem;">
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
             <a href="{% url 'atelier:collection_detail' collection.slug %}" class="btn btn-gold">
               Explore Suite ({{ collection.products.count }} Jewels)
             </a>
